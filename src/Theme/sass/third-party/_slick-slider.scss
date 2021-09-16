@@ -1,0 +1,48 @@
+@import "../abstract/variables";
+@import "../../node_modules/slick-carousel/slick/slick-theme.css";
+@import "../../node_modules/slick-carousel/slick/slick.css";
+
+.#{$prefix}slider {
+  width: 100%;
+  max-width: 1200px;
+
+  .slick-next,
+  .slick-prev {
+    height: 10rem;
+    width: 4.8rem;
+    background-color: rgba(black, .5);
+    border-radius: $border-radius * 4;
+    font-family: $icon-font-family;
+    font-size: 4.8rem;
+
+    &:focus {
+      outline: 1px solid blue;
+    }
+
+    &::before {
+      font-family: inherit;
+      font-size: inherit;
+    }
+  }
+
+  .slick-slide {
+    min-width: 24rem;
+  }
+
+  .slick-next {
+    right: 2rem;
+
+    &::before {
+      content: content(map-get($mat-font-icon-class-and-unicode-map, keyboard_arrow_right));
+    }
+  }
+
+  .slick-prev {
+    left: 2rem;
+    z-index: 2;
+
+    &::before {
+      content: content(map-get($mat-font-icon-class-and-unicode-map, keyboard_arrow_left));
+    }
+  }
+}
