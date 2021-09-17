@@ -1,5 +1,5 @@
 import classes from './Input.module.scss'
-import {ChangeEventHandler} from "react";
+import { ChangeEventHandler, forwardRef } from "react";
 import Container from "../Container/Container";
 
 export type INPUT_PROPS = {
@@ -11,7 +11,7 @@ export type INPUT_PROPS = {
 	label? : string | number
 }
 
-const Input = (props: INPUT_PROPS) => {
+const Input = forwardRef( (props: INPUT_PROPS, ref: any) => {
 	
 	const {
 		type,
@@ -34,12 +34,13 @@ const Input = (props: INPUT_PROPS) => {
 				type={type}
 				autoComplete={"false"}
 				id={id}
+				ref={ref}
 				value={value}
 				onChange={onChange}
 				name={name}
 			/>
 		</Container>
 	);
-}
+});
 
 export default Input;
