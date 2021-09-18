@@ -1,16 +1,14 @@
+import React, { useEffect, useRef } from "react";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
-import React, { useEffect, useRef, useState } from "react";
-import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import {actions, productsStore } from "../../store/products-store";
+import { sendCar } from "../../api";
 
-export interface Car {
-  name: string,
-  model: string,
-  price: number
-}
-
-const AddCart = () => {
-  const [carList, setCarList] = useState<Car[]>([]);
+const AdminPage = () => {
+  const dispatch = useDispatch();
+  // for later use when creating admin page
+  const products = useSelector((state: productsStore) => state.products);
   const nameRef = useRef<any>(null);
   const priceRef = useRef<any>(null);
   const modelRef = useRef<any>(null);
@@ -24,33 +22,18 @@ const AddCart = () => {
 
     if (name.trim().length > 0 && model.trim().length > 0 && price.trim().length > 0) {
       const newCar = { name, model, price }
+      dispatch(actions.addProduct(newCar))
       await sendCar(newCar);
-      await getCars();
+      // get newLy cars from redux store
+      // await getCars();
     }
-  }
-
-  const sendCar = async (car: any) => await axios.post('/carList.json', car);
-
-  const getCars = async () => {
-    const response = await axios.get('/carList.json');
-    const data = await response.data;
-    let dataArray = [];
-
-    for (const key in data) {
-      dataArray.push({
-        name: data[key].name,
-        model: data[key].model,
-        price: data[key].price
-      })
-    }
-    // later update redux store
   }
 
   useEffect(() => {
-    getCars();
-  }, [])
+    // on cmp initialization get new
+    // getCars();
+  }, []);
   return (
-    // <SliderAbstract />
     <div>
       <form
         onSubmit={formSubmitHandler}
@@ -67,8 +50,11 @@ const AddCart = () => {
           Submit
         </Button>
       </form>
+      <div>
+
+      </div>
     </div>
   );
 }
 
-export default AddCart;
+export default AdminPage;

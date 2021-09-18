@@ -7,6 +7,7 @@ import AboutPage from "../../AboutPage/AboutPage";
 import ProductsPage from "../../ProductsPage/ProductsPage";
 import CartPage from "../../CartPage/CartPage";
 import ProductItem from "../../ProductItem/ProductItem";
+import AdminPage from "../../AdminPage/AdminPage";
 
 const Body = () => {
   return(
@@ -23,6 +24,9 @@ const Body = () => {
         </Route>
         <Route path={'/about'}>
           <AboutPage />
+        </Route>
+        <Route path={'/admin'}>
+          <AdminPage />
         </Route>
         <Route path={'/products'} exact>
           <ProductsPage />

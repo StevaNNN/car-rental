@@ -8,6 +8,7 @@ export type RESPONSIVE_PROPS = {
 }
 
 export type CONTAINER_PROPS = {
+  style?: {},
   scope?: string,
   // tabindex for cmp
   tabIndex?: number,
@@ -123,6 +124,7 @@ const Container = forwardRef((props: CONTAINER_PROPS, ref: any) => {
   }, []);
 
   const {
+    style,
     scope,
     ariaHidden,
     ariaLabeledBy,
@@ -222,6 +224,7 @@ const Container = forwardRef((props: CONTAINER_PROPS, ref: any) => {
         tabIndex: tabIndex,
         key: cmpKey,
         ref: ref,
+        style: style,
         "aria-label": ariaLabel,
         "aria-labelledby": ariaLabeledBy,
         className: containerClasses,

@@ -48,6 +48,13 @@ const Header = () => {
         </Container>
         <Container>
           <NavLink
+            to={'/admin'}
+            activeClassName={classes.LinkActive}
+            className={classes.Link}
+          >
+            Admin
+          </NavLink>
+          <NavLink
             to={'/cart'}
             activeClassName={classes.LinkActive}
             className={classes.Link}
