@@ -23,7 +23,7 @@ const AdminPage = () => {
     if (name.trim().length > 0 && model.trim().length > 0 && price.trim().length > 0) {
       const newCar = { name, model, price }
       dispatch(actions.addProduct(newCar))
-      await sendCar(newCar);
+      // await sendCar(newCar);
       // get newLy cars from redux store
       // await getCars();
     }

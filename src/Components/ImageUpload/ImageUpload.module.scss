@@ -1,0 +1,13 @@
+@import "../../Theme/sass/abstract/variables";
+
+.ImageUpload {
+  border-radius: $border-radius;
+  background-color: rgba(lightskyblue, .2);
+  border: 2px dashed $border-color;
+  height: 20rem;
+  width: 20rem;
+}
+
+.InputFile {
+  display: none;
+}

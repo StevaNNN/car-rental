@@ -1,4 +1,4 @@
-import {createSlice} from "@reduxjs/toolkit";
+import {createSlice, PayloadAction} from "@reduxjs/toolkit";
 import { Car } from "../Components/types";
 import store from "./index";
 
@@ -18,12 +18,11 @@ const productsSlice = createSlice({
   name: 'products',
   initialState: initialState,
   reducers: {
-    addProduct(state, action) {
-      const t = [...state];
-      t.push(action.payload)
+    addProduct: (state, action:PayloadAction<Car>) => {
+      return [...state, action.payload];
     },
-    removeProduct(state, action) {
-
+    removeProduct: (state, action:PayloadAction<any>) => {
+      return state.splice(action.payload, 1);
     }
   }
 });

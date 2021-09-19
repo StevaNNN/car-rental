@@ -1,13 +1,26 @@
-export type CartItem = {
-  carModel: string,
-  pickUpAddress: string,
-  leaveAddress: string,
-  pickUpDate: string,
-  leaveDate: string,
+export type Car = {
+  name: string | null,
+  model: string | null,
+  price: string | null,
+  img?: string | null,
+  airCondition?: boolean,
+  transmission?: boolean,
+  luggage?: boolean,
+  doors?: number | null,
+  passengers?: number | null,
+  pickUpAddress?: string,
+  leaveAddress?: string,
+  pickUpDate?: string,
+  leaveDate?: string,
   trailer?: boolean,
   gps?: boolean,
   childSeat?: boolean,
   extraDriver?: boolean
+}
+
+export type CartItem = {
+  selectedCar: Car,
+  userData: UserInfo
 }
 
 export type UserInfo = {
@@ -18,17 +31,5 @@ export type UserInfo = {
   email: string,
   address: string,
   city: string,
-  state: string,
-  zipCode: number
-}
-
-export type Car = {
-  name: string,
-  model: string,
-  price: string,
-  airCondition?: boolean,
-  transmission?: boolean,
-  luggage?: boolean,
-  doors?: number | null,
-  passengers?: number | null
+  zipCode: number | string
 }

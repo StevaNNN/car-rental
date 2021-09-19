@@ -91,3 +91,9 @@ dl {
 * {
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
+
+.form-field {
+    input:first-of-type {
+        margin-right: 10px;
+    }
+}
