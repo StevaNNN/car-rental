@@ -1,4 +1,4 @@
-import {useParams} from "react-router";
+import { useParams } from "react-router";
 import Container from "../UI/Container/Container";
 import Button from "../UI/Button/Button";
 
@@ -15,10 +15,11 @@ const ProductItem = (props: any) => {
     luggage,
     doors,
     passengers,
-    addItemToCart
+    addItemToCart,
+    productsPage
   } = props;
 
-  return(
+  return (
     <Container
       vBox
       style={{
@@ -36,9 +37,9 @@ const ProductItem = (props: any) => {
       <p>{luggage && luggage}</p>
       <p>{doors && doors}</p>
       <p>{passengers && passengers}</p>
-      <Button onClick={addItemToCart}>
+      {productsPage && <Button onClick={addItemToCart}>
         Add to cart
-      </Button>
+      </Button>}
     </Container>
   )
 }

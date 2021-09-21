@@ -15,12 +15,14 @@ export type Car = {
   trailer?: boolean,
   gps?: boolean,
   childSeat?: boolean,
-  extraDriver?: boolean
+  extraDriver?: boolean,
+  loading?: any
 }
 
 export type CartItem = {
   selectedCar: Car,
-  userData: UserInfo
+  userData: UserInfo,
+  totalCost: string
 }
 
 export type UserInfo = {

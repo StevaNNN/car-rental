@@ -3,40 +3,143 @@ import { useDispatch, useSelector } from "react-redux";
 import Container from "../UI/Container/Container";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
-import { cartState, actions } from "../../store/cart-store";
+import { cartState } from "../../store/cart-store";
 import { Car } from "../types";
 import { truthyCar } from "../../util";
+import useField from "../../hooks/use-field";
+import { sendItemToCart } from "../../actions/cart-actions";
+import { guestState } from "../../store/guest-store";
+import Dialog from "../UI/Dialog/Dialog";
 
 const CartPage = () => {
   const dispatch = useDispatch();
-  // DATA
   const cartData = useSelector((state: cartState) => state.cart);
-  const { selectedCar: cartSelectedCar, userData } = cartData;
-  const [selectedCar, setSelectedCar] = useState<Car>({
-    name: '',
-    model: '',
-    price: ''
-  });
-  // Handlers
-  const nameHandler = (e: any) => dispatch(actions.addUserName(e.target.value));
-  const lastNameHandler = (e: any) => dispatch(actions.addUserLastName(e.target.value));
-  const ageHandler = (e: any) => dispatch(actions.addUserAge(e.target.value));
-  const phoneHandler = (e: any) => dispatch(actions.addUserPhone(e.target.value));
-  const emailHandler = (e: any) => dispatch(actions.addUserEmail(e.target.value));
-  const addressHandler = (e: any) => dispatch(actions.addUserAddress(e.target.value));
-  const cityHandler = (e: any) => dispatch(actions.addUserCity(e.target.value));
-  const zipHandler = (e: any) => dispatch(actions.addUserZipCode(e.target.value));
+  const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
+  const guestData = useSelector((state: guestState) => state.guest);
+  const [selectedCar, setSelectedCar] = useState<Car>({ name: '', model: '', price: '' });
+  let formIsValid = false;
+
+  const {
+    value: name,
+    hasError: nameHasError,
+    isValid: nameIsValid,
+    valueBlurHandler: nameBlurHandler,
+    valueChangeHandler: nameChangeHandler,
+    reset: nameReset
+  } = useField((value: string) => value.trim() !== '');
+
+  const {
+    value: lastName,
+    hasError: lastNameHasError,
+    isValid: lastNameIsValid,
+    valueBlurHandler: lastNameBlurHandler,
+    valueChangeHandler: lastNameChangeHandler,
+    reset: lastNameReset
+  } = useField((value: string) => value.trim() !== '');
+
+  const {
+    value: age,
+    hasError: ageHasError,
+    isValid: ageIsValid,
+    valueBlurHandler: ageBlurHandler,
+    valueChangeHandler: ageChangeHandler,
+    reset: ageReset
+  } = useField((value: string) => value.trim() !== '');
+
+  const {
+    value: phone,
+    hasError: phoneHasError,
+    isValid: phoneIsValid,
+    valueBlurHandler: phoneBlurHandler,
+    valueChangeHandler: phoneChangeHandler,
+    reset: phoneReset
+  } = useField((value: string) => value.trim() !== '');
+
+  const {
+    value: address,
+    hasError: addressHasError,
+    isValid: addressIsValid,
+    valueBlurHandler: addressBlurHandler,
+    valueChangeHandler: addressChangeHandler,
+    reset: addressReset
+  } = useField((value: string) => value.trim() !== '');
+
+  const {
+    value: email,
+    hasError: emailHasError,
+    isValid: emailIsValid,
+    valueBlurHandler: emailBlurHandler,
+    valueChangeHandler: emailChangeHandler,
+    reset: emailReset
+  } = useField((value: string) => value.trim() !== '' && value.includes('@'));
+
+  const {
+    value: city,
+    hasError: cityHasError,
+    isValid: cityIsValid,
+    valueBlurHandler: cityBlurHandler,
+    valueChangeHandler: cityChangeHandler,
+    reset: cityReset
+  } = useField((value: string) => value.trim() !== '');
+
+  const {
+    value: zip,
+    hasError: zipHasError,
+    isValid: zipIsValid,
+    valueBlurHandler: zipBlurHandler,
+    valueChangeHandler: zipChangeHandler,
+    reset: zipReset
+  } = useField((value: string) => value.trim() !== '');
+
+  if(
+    nameIsValid &&
+    lastNameIsValid &&
+    ageIsValid &&
+    addressIsValid &&
+    phoneIsValid &&
+    emailIsValid &&
+    cityIsValid &&
+    zipIsValid) {
+    formIsValid = true
+  }
 
   const onFormSubmit = (e: any) => {
     e.preventDefault();
-    dispatch(actions.onFormSubmit(cartData))
+    if(!formIsValid) {
+      return;
+    }
+
+    // combine objects for sending data to redux store
+    dispatch(sendItemToCart({
+     selectedCar: {...guestData},
+     userData: {
+       name: name,
+       lastName: lastName,
+       email: email,
+       phone: phone,
+       city: city,
+       zipCode: zip,
+       age: age,
+       address: address
+     },
+      totalCost: '20e'
+    }));
+
+    setIsDialogVisible(true)
+
+    nameReset();
+    lastNameReset();
+    ageReset();
+    phoneReset();
+    addressReset()
+    emailReset();
+    cityReset();
+    zipReset();
   }
 
   useEffect(() => {
-    setSelectedCar(prevState => {
-      return cartSelectedCar
-    })
-  }, [cartSelectedCar]);
+    setSelectedCar(guestData)
+  }, [guestData])
 
   return (
     <Container className="cart-page" hBox>
@@ -56,33 +159,67 @@ const CartPage = () => {
         </ul>
       </Container>
       <Container vBox>
-        <Container vBox flex1 style={{
-          "marginBottom": "20px"
-        }}>
+        <Container vBox flex1 style={{ "marginBottom": "20px" }}>
           <h1 className="cr-font-size-lg">Total price: 200e</h1>
           <p>Your order will be sent to the shop via email, you will not have to pay for anything for now </p>
         </Container>
         <form onSubmit={onFormSubmit}>
           <Container hBox className={'form-field'}>
-            <Input type="text" label="Name" onChange={nameHandler} value={userData.name} />
-            <Input type="text" label="Last name" onChange={lastNameHandler} value={userData.lastName} />
+            <Input type="text" label="Name" onChange={nameChangeHandler} onBlur={nameBlurHandler} value={name}
+                   hasError={nameHasError} />
+            <Input type="text" label="Last name" onChange={lastNameChangeHandler} value={lastName}
+                   onBlur={lastNameBlurHandler} hasError={lastNameHasError} />
           </Container>
           <Container hBox className={'form-field'}>
-            <Input type="number" label="Age" onChange={ageHandler} value={userData.age} />
-            <Input type="text" label="Phone" onChange={phoneHandler} value={userData.phone} />
+            <Input type="number" label="Age" onChange={ageChangeHandler} onBlur={ageBlurHandler} value={age}
+                   hasError={ageHasError} />
+            <Input type="text" label="Phone" onChange={phoneChangeHandler} onBlur={phoneBlurHandler} value={phone}
+                   hasError={phoneHasError} />
           </Container>
           <Container hBox className={'form-field'}>
-            <Input type="text" label="Address" onChange={addressHandler} value={userData.address} />
-            <Input type="text" label="E-mail" onChange={emailHandler} value={userData.email} />
+            <Input type="text" label="Address" onChange={addressChangeHandler} onBlur={addressBlurHandler}
+                   value={address} hasError={addressHasError} />
+            <Input type="text" label="E-mail" onChange={emailChangeHandler} onBlur={emailBlurHandler} value={email}
+                   hasError={emailHasError} />
           </Container>
           <Container hBox className={'form-field'}>
-            <Input type="text" label="City" onChange={cityHandler} value={userData.city} />
-            <Input type="number" label="Zip" onChange={zipHandler} value={userData.zipCode} />
+            <Input type="text" label="City" onChange={cityChangeHandler} onBlur={cityBlurHandler} value={city}
+                   hasError={cityHasError} />
+            <Input type="number" label="Zip" onChange={zipChangeHandler} onBlur={zipBlurHandler} value={zip}
+                   hasError={zipHasError} />
           </Container>
           <textarea placeholder={"Additional text"} />
           <Button>Submit</Button>
         </form>
       </Container>
+      <Dialog
+        open={isDialogVisible}
+        close={() => setIsDialogVisible(false)}
+        title={'Order confirmation'}
+      >
+        <h1>Make sure that these infos are coorect before reservation</h1>
+        <ul className="cart-items">
+          {truthyCar(selectedCar) && <li
+            style={{
+              border: '1px solid black',
+              padding: '20px',
+              margin: '20px'
+            }}
+          >
+            <p>{selectedCar.name}</p>
+            <p>{selectedCar.model}</p>
+            <p>{selectedCar.price}</p>
+          </li>}
+        </ul>
+        <p>Name is: {name}</p>
+        <p>Last name is: {lastName}</p>
+        <p>Email is: {email}</p>
+        <p>Phone is: {phone}</p>
+        <p>Address is: {address}</p>
+        <p>City is: {city}</p>
+        <p>Age is: {age}</p>
+        <p>Zip code is: {zip}</p>
+      </Dialog>
     </Container>
   );
 }

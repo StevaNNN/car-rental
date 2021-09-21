@@ -1,14 +1,17 @@
-import React, { useEffect, useRef } from "react";
+import React, { useRef } from "react";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
-import {actions, productsStore } from "../../store/products-store";
-import { sendCar } from "../../api";
+import { productsState } from "../../store/products-store";
+import { sendCarData } from "../../actions/admin-actions";
+import ProductItem from "../ProductItem/ProductItem";
+import { Car } from "../types";
+import { truthyCar } from "../../util";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
   // for later use when creating admin page
-  const products = useSelector((state: productsStore) => state.products);
+  const products = useSelector((state: productsState) => state.products);
   const nameRef = useRef<any>(null);
   const priceRef = useRef<any>(null);
   const modelRef = useRef<any>(null);
@@ -21,18 +24,15 @@ const AdminPage = () => {
     const price = priceRef.current?.value;
 
     if (name.trim().length > 0 && model.trim().length > 0 && price.trim().length > 0) {
-      const newCar = { name, model, price }
-      dispatch(actions.addProduct(newCar))
-      // await sendCar(newCar);
-      // get newLy cars from redux store
-      // await getCars();
+      const newCar = {
+        name,
+        model,
+        price
+      }
+      dispatch(sendCarData(newCar))
     }
   }
 
-  useEffect(() => {
-    // on cmp initialization get new
-    // getCars();
-  }, []);
   return (
     <div>
       <form
@@ -50,9 +50,18 @@ const AdminPage = () => {
           Submit
         </Button>
       </form>
-      <div>
-
-      </div>
+      <ul>
+        {products.map((product: Car, index) => {
+          return (
+            truthyCar(product) && <ProductItem
+              key={index}
+              name={product.name}
+              model={product.model}
+              price={product.price}
+            />
+          );
+        })}
+      </ul>
     </div>
   );
 }

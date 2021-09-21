@@ -1,5 +1,5 @@
 import classes from './Input.module.scss'
-import { ChangeEventHandler, forwardRef } from "react";
+import { ChangeEventHandler, FocusEventHandler, forwardRef } from "react";
 import Container from "../Container/Container";
 
 export type INPUT_PROPS = {
@@ -8,7 +8,9 @@ export type INPUT_PROPS = {
 	id?: any,
 	value?: string | number | undefined,
 	onChange?: ChangeEventHandler<HTMLInputElement> | undefined,
-	label? : string | number
+	onBlur?: FocusEventHandler<HTMLInputElement> | undefined
+	label? : string | number,
+	hasError?: boolean
 }
 
 const Input = forwardRef( (props: INPUT_PROPS, ref: any) => {
@@ -19,7 +21,9 @@ const Input = forwardRef( (props: INPUT_PROPS, ref: any) => {
 		id,
 		label,
 		value,
-		onChange
+		onChange,
+		onBlur,
+		hasError
 	} = props;
 	
 	return(
@@ -43,8 +47,10 @@ const Input = forwardRef( (props: INPUT_PROPS, ref: any) => {
 				ref={ref}
 				value={value}
 				onChange={onChange}
+				onBlur={onBlur}
 				name={name}
 			/>
+			{hasError && <p>Field invalid</p>}
 		</Container>
 	);
 });

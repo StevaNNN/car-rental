@@ -6,3 +6,5 @@ import { Car } from "./Components/types";
 export const truthyCar = (car: Car) => {
   return !!car.name || !!car.model || !!car.price;
 }
+
+export const GUEST_COOKIE_NAME = "guestCookie";

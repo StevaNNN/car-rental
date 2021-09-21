@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Car } from "../Components/types";
 import store from "./index";
 
-const initialState: Car[] = [{
+const initialState: Car = {
   name: '',
   model: '',
   price: '',
@@ -12,20 +12,20 @@ const initialState: Car[] = [{
   doors: null,
   passengers: null,
   loading: null
-}];
+};
 
-const nameSpace = 'products';
+const nameSpace = 'guestStore';
 
-const productsSlice = createSlice({
+const guestSlice = createSlice({
   name: `${nameSpace}`,
   initialState: initialState,
   reducers: {
-    replaceProducts: (state, action:PayloadAction<Car[]>) => {
+    updateCookie: (state, action:PayloadAction<Car>) => {
       return action.payload
     }
   }
 });
 
-export const { replaceProducts } = productsSlice.actions;
-export type productsState = ReturnType<typeof store.getState>
-export default productsSlice;
+export const { updateCookie } = guestSlice.actions;
+export type guestState = ReturnType<typeof store.getState>
+export default guestSlice;
