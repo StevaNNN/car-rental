@@ -1,3 +1,4 @@
+import React from "react";
 import classes from './CheckboxAndRadio.module.scss';
 import Container from "../Container/Container";
 import classNames from "classnames";
@@ -12,7 +13,7 @@ export type TRT = {
 	onChange?: ChangeEventHandler<HTMLInputElement> | undefined
 }
 
-const CheckboxAndRadio = (props: TRT) => {
+const CheckboxAndRadio = React.forwardRef((props: TRT, ref:any) => {
 	const {
 		checked,
 		id,
@@ -21,14 +22,14 @@ const CheckboxAndRadio = (props: TRT) => {
 		type,
 		onChange
 	} = props;
-	
+
 	const checkboxAndRadioClassName = classNames(
 		`${classes.checkbox}`,
 		{
 			[`${classes.radio}`] : type === 'radio'
 		}
 	)
-	
+
 	return(
 		<Container
 			alignItemsCenter
@@ -42,11 +43,12 @@ const CheckboxAndRadio = (props: TRT) => {
 				type={type}
 				id={id}
 				checked={checked}
+				ref={ref}
 				value={value}
 				onChange={onChange}
 			/>
 		</Container>
 	)
-}
+})
 
 export default CheckboxAndRadio;

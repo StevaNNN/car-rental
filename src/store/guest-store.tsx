@@ -10,8 +10,7 @@ const initialState: Car = {
   transmission: false,
   luggage: false,
   doors: null,
-  passengers: null,
-  loading: null
+  passengers: null
 };
 
 const nameSpace = 'guestStore';

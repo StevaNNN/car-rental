@@ -10,7 +10,7 @@ export const sendCarData = (carData: Car) => {
     }
     try {
       await sendRequest();
-      dispatch(getCarData())
+      dispatch(getCarData());
     } catch (error) {
       alert(error)
     }

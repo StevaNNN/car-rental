@@ -8,10 +8,9 @@ const initialState: Car[] = [{
   price: '',
   airCondition: false,
   transmission: false,
-  luggage: false,
+  luggage: '',
   doors: null,
-  passengers: null,
-  loading: null
+  passengers: null
 }];
 
 const nameSpace = 'products';

@@ -4,8 +4,8 @@ export type Car = {
   price: string | null,
   img?: string | null,
   airCondition?: boolean,
-  transmission?: boolean,
-  luggage?: boolean,
+  transmission?: any,
+  luggage?: any,
   doors?: number | null,
   passengers?: number | null,
   pickUpAddress?: string,
@@ -15,8 +15,7 @@ export type Car = {
   trailer?: boolean,
   gps?: boolean,
   childSeat?: boolean,
-  extraDriver?: boolean,
-  loading?: any
+  extraDriver?: boolean
 }
 
 export type CartItem = {
