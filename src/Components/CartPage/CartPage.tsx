@@ -10,13 +10,28 @@ import useField from "../../hooks/use-field";
 import { sendItemToCart } from "../../actions/cart-actions";
 import { guestState } from "../../store/guest-store";
 import Dialog from "../UI/Dialog/Dialog";
+import ProductItem from "../ProductItem/ProductItem";
 
 const CartPage = () => {
   const dispatch = useDispatch();
   const cartData = useSelector((state: cartState) => state.cart);
   const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
   const guestData = useSelector((state: guestState) => state.guest);
-  const [selectedCar, setSelectedCar] = useState<Car>({ name: '', model: '', price: '' });
+  const [selectedCar, setSelectedCar] = useState<Car>({
+    name: '',
+    model: '',
+    price: '',
+    img: '',
+    airCondition: false,
+    transmission: '',
+    luggage: '',
+    doors: null,
+    passengers: null,
+    trailer: false,
+    gps: false,
+    childSeat: false,
+    extraDriver: false
+  });
   let formIsValid = false;
 
   const {
@@ -122,7 +137,7 @@ const CartPage = () => {
        age: age,
        address: address
      },
-      totalCost: '20e'
+      totalCost: guestData.price
     }));
 
     setIsDialogVisible(true)
@@ -145,22 +160,26 @@ const CartPage = () => {
     <Container className="cart-page" hBox>
       <Container flex1>
         <ul className="cart-items">
-          {truthyCar(selectedCar) && <li
-            style={{
-              border: '1px solid black',
-              padding: '20px',
-              margin: '20px'
-            }}
-          >
-            <p>{selectedCar.name}</p>
-            <p>{selectedCar.model}</p>
-            <p>{selectedCar.price}</p>
-          </li>}
+          {truthyCar(selectedCar) && <ProductItem
+              name={name}
+              model={selectedCar.model}
+              price={selectedCar.price}
+              img={selectedCar.img}
+              airCondition={selectedCar.airCondition}
+              transmission={selectedCar.transmission}
+              luggage={selectedCar.luggage}
+              doors={selectedCar.doors}
+              passengers={selectedCar.passengers}
+              trailer={selectedCar.trailer}
+              gps={selectedCar.gps}
+              childSeat={selectedCar.childSeat}
+              extraDriver={selectedCar.extraDriver}
+          />}
         </ul>
       </Container>
       <Container vBox>
         <Container vBox flex1 style={{ "marginBottom": "20px" }}>
-          <h1 className="cr-font-size-lg">Total price: 200e</h1>
+          <h1 className="cr-font-size-lg">{guestData.price}</h1>
           <p>Your order will be sent to the shop via email, you will not have to pay for anything for now </p>
         </Container>
         <form onSubmit={onFormSubmit}>

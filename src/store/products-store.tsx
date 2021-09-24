@@ -7,10 +7,14 @@ const initialState: Car[] = [{
   model: '',
   price: '',
   airCondition: false,
-  transmission: false,
+  transmission: '',
   luggage: '',
   doors: null,
-  passengers: null
+  passengers: null,
+  trailer: false,
+  gps: false,
+  childSeat: false,
+  extraDriver: false
 }];
 
 const nameSpace = 'products';

@@ -9,8 +9,8 @@ const initialState: CartItem[] = [{
       price: '',
       img: '',
       airCondition: false,
-      transmission: false,
-      luggage: false,
+      transmission: '',
+      luggage: '',
       doors: null,
       passengers: null,
       pickUpAddress: '',
@@ -42,9 +42,6 @@ const cartSlice = createSlice({
   name: `${nameSpace}`,
   initialState: initialState,
   reducers: {
-    addCarToCart: (state, action: PayloadAction<any>) => {
-
-    },
     formSubmit: (state, action: PayloadAction<CartItem>) => {
       state.push(action.payload)
     }

@@ -1,10 +1,7 @@
-import { useParams } from "react-router";
 import Container from "../UI/Container/Container";
 import Button from "../UI/Button/Button";
 
 const ProductItem = (props: any) => {
-  // @ts-ignore
-  const params: {} = useParams().productId;
 
   const {
     name,
@@ -29,14 +26,14 @@ const ProductItem = (props: any) => {
       }}
       htmlTag={'li'}
     >
-      <p>{name}</p>
-      <p>{model}</p>
-      <p>{price}</p>
-      <p>{airCondition && airCondition}</p>
-      <p>{transmission && transmission}</p>
-      <p>{luggage && luggage}</p>
-      <p>{doors && doors}</p>
-      <p>{passengers && passengers}</p>
+      <p>Car name is: {name}</p>
+      <p>Car model is: {model}</p>
+      <p>Car price is : {price}</p>
+      <p>{airCondition && 'Car has air condition'} </p>
+      <p>{transmission && `Car has ${transmission} transmission`}</p>
+      <p>{luggage && `Car supports ${luggage} of bags`}</p>
+      <p>{doors && `Car has ${doors} doors`}</p>
+      <p>{passengers && `Car accepts ${passengers} passengers`}</p>
       {productsPage && <Button onClick={addItemToCart}>
         Add to cart
       </Button>}

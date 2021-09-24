@@ -6,11 +6,16 @@ const initialState: Car = {
   name: '',
   model: '',
   price: '',
+  img: '',
   airCondition: false,
-  transmission: false,
-  luggage: false,
+  transmission: '',
+  luggage: '',
   doors: null,
-  passengers: null
+  passengers: null,
+  trailer: false,
+  gps: false,
+  childSeat: false,
+  extraDriver: false
 };
 
 const nameSpace = 'guestStore';

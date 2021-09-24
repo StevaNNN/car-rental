@@ -8,100 +8,167 @@ import ProductItem from "../ProductItem/ProductItem";
 import {Car} from "../types";
 import {truthyCar} from "../../util";
 import CheckboxAndRadio from "../UI/CheckboxAndRadio/CheckboxAndRadio";
-import {Action, ActionKind, adminReducer} from "../../reducers/admin-page-reducer";
+import {adminReducer} from "../../reducers/admin-page-reducer";
 
 const AdminPage = () => {
-  const dispatch = useDispatch();
-  //@ts-ignore
-  const [state, adminDispatch] = useReducer(adminReducer, {
-      name: '', model: '',
-      price: '', img: '',
-      airCondition: false, transmission: false,
-      luggage: '', doors: null,
-      passengers: null, trailer: false,
-      gps: false, childSeat: false, extraDriver: false
-  });
-  // for later use when creating admin page
-  const products = useSelector((state: productsState) => state.products);
-  const nameRef = useRef<any>(null);
-  const priceRef = useRef<any>(null);
-  const modelRef = useRef<any>(null);
-  const airConditionRef = useRef<any>(null);
-
-  const formSubmitHandler = async (e: any) => {
-    e.preventDefault();
-
-    const name = nameRef.current?.value;
-    const model = modelRef.current?.value;
-    const price = priceRef.current?.value;
-
-    if (model.trim().length > 0 && price.trim().length > 0) {
-      const newCar = {
+    const dispatch = useDispatch();
+    //@ts-ignore
+    const [{
         name,
         model,
-        price
-      }
-      dispatch(sendCarData(newCar))
+        price,
+        img,
+        airCondition,
+        transmission,
+        luggage,
+        doors,
+        passengers,
+        trailer,
+        gps,
+        childSeat,
+        extraDriver
+    }, adminDispatch] = useReducer(adminReducer, {
+        name: '',
+        model: '',
+        price: '',
+        img: '',
+        airCondition: false,
+        transmission: '',
+        luggage: '',
+        doors: null,
+        passengers: null,
+        trailer: false,
+        gps: false,
+        childSeat: false,
+        extraDriver: false
+    });
+    // for later use when creating admin page
+    const products = useSelector((state: productsState) => state.products);
+
+    const formSubmitHandler = async (e: any) => {
+        e.preventDefault();
+
+        const newCar = {
+            name,
+            model,
+            price,
+            img,
+            airCondition,
+            transmission,
+            luggage,
+            doors,
+            passengers,
+            trailer,
+            gps,
+            childSeat
+        }
+        dispatch(sendCarData(newCar))
     }
-  }
 
-  // const test = (e: any) => {
-  //     const t: Action = {
-  //         type: ActionKind.Name,
-  //         payload: e.target.value
-  //     }
-  //     adminDispatch(t);
-  // }
-
-  return (
-    <div>
-      <form
-        onSubmit={formSubmitHandler}
-        style={{
-          padding: '20px',
-          border: '1px solid black',
-          margin: '20px'
-        }}
-      >
-        <Input
-            type="text"
-            label={'name'}
-            ref={nameRef}
-            onChange={(e:any) => test(e)}
-        />
-        <Input
-            type="text"
-            label={"model"}
-            ref={modelRef}
-        />
-        <Input
-            type="number"
-            label={"price"}
-            ref={priceRef}
-        />
-        <CheckboxAndRadio
-            label={"Car has Air Condition?"}
-            type="checkbox"
-            ref={airConditionRef}
-        />
-        <Button type="submit">
-          Submit
-        </Button>
-      </form>
-      <ul>
-        {products.map((product: Car, index) => {
-          return (
-            truthyCar(product) && <ProductItem
-              key={index}
-              name={product.name}
-              model={product.model}
-              price={product.price}
-            />
-          );
-        })}
-      </ul>
-    </div>
-  );
+    return (
+        <div>
+            <form
+                onSubmit={formSubmitHandler}
+                style={{
+                    padding: '20px',
+                    border: '1px solid black',
+                    margin: '20px'
+                }}
+            >
+                <Input
+                    type="text"
+                    label={'name'}
+                    value={name}
+                    onChange={(e: any) => adminDispatch({type: 'NAME', payload: e.target.value})}
+                />
+                <Input
+                    type="text"
+                    label={"model"}
+                    value={model}
+                    onChange={(e: any) => adminDispatch({type: 'MODEL', payload: e.target.value})}
+                />
+                <Input
+                    type="text"
+                    label={"price"}
+                    value={price}
+                    onChange={(e: any) => adminDispatch({type: 'PRICE', payload: e.target.value})}
+                />
+                <CheckboxAndRadio
+                    label={"Car has Air Condition(Yes/No)?"}
+                    type="checkbox"
+                    value={airCondition}
+                    onChange={(e: any) => adminDispatch({type: 'AIR', payload: e.target.checked})}
+                />
+                <Input
+                    label={"Car transmission is?: "}
+                    type={"text"}
+                    value={transmission}
+                    onChange={(e: any) => adminDispatch({type: 'TRANS', payload: e.target.value})}
+                />
+                <Input
+                    label={"Car can take how many bags in back?: "}
+                    type={"text"}
+                    value={luggage}
+                    onChange={(e: any) => adminDispatch({type: 'LUGGAGE', payload: e.target.value})}
+                />
+                <Input
+                    label={"Car has how many doors?: "}
+                    type={"text"}
+                    value={doors}
+                    onChange={(e: any) => adminDispatch({type: 'DOORS', payload: e.target.value})}
+                />
+                <Input
+                    label={"Car can carry how many passengers?: "}
+                    type={"number"}
+                    value={passengers}
+                    onChange={(e: any) => adminDispatch({type: 'PASSENGERS', payload: e.target.value})}
+                />
+                <CheckboxAndRadio
+                    label={"Car has trailer?: "}
+                    type={"checkbox"}
+                    value={trailer}
+                    onChange={(e: any) => adminDispatch({type: 'TRAILER', payload: e.target.value})}
+                />
+                <CheckboxAndRadio
+                    label={"Car has GPS?: "}
+                    type={"checkbox"}
+                    value={gps}
+                    onChange={(e: any) => adminDispatch({type: 'GPS', payload: e.target.value})}
+                />
+                <CheckboxAndRadio
+                    label={"Car supports Child Seat?: "}
+                    type={"checkbox"}
+                    value={childSeat}
+                    onChange={(e: any) => adminDispatch({type: 'CHILD', payload: e.target.value})}
+                />
+                <Button type="submit">
+                    Submit
+                </Button>
+            </form>
+            <ul>
+                {products.map((product: Car, index) => {
+                    return (
+                        truthyCar(product) && <ProductItem
+                            key={index}
+                            name={product.name}
+                            model={product.model}
+                            price={product.price}
+                            img={product.img}
+                            airCondition={product.airCondition}
+                            transmission={product.transmission}
+                            luggage={product.luggage}
+                            doors={product.doors}
+                            passengers={product.passengers}
+                            trailer={product.trailer}
+                            gps={product.gps}
+                            childSeat={product.childSeat}
+                            extraDriver={product.extraDriver}
+                        />
+                    );
+                })}
+            </ul>
+        </div>
+    );
 }
 
 export default AdminPage;

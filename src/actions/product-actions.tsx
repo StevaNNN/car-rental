@@ -18,7 +18,17 @@ export const getCarData = () => {
         dataArray.push({
           name: carList[key].name,
           model: carList[key].model,
-          price: carList[key].price
+          price: carList[key].price,
+          img: carList[key].img,
+          airCondition: carList[key].airCondition,
+          transmission: carList[key].transmission,
+          luggage: carList[key].luggage,
+          doors: carList[key].doors,
+          passengers: carList[key].passengers,
+          trailer: carList[key].trailer,
+          gps: carList[key].gps,
+          childSeat: carList[key].childSeat,
+          extraDriver: carList[key].extraDriver
         })
       }
       dispatch(replaceProducts(dataArray))

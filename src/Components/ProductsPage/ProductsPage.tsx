@@ -25,8 +25,18 @@ const ProductsPage = () => {
             key={index}
             name={product.name}
             model={product.model}
-            productsPage
             price={product.price}
+            img={product.img}
+            airCondition={product.airCondition}
+            transmission={product.transmission}
+            luggage={product.luggage}
+            doors={product.doors}
+            passengers={product.passengers}
+            trailer={product.trailer}
+            gps={product.gps}
+            childSeat={product.childSeat}
+            extraDriver={product.extraDriver}
+            productsPage
             addItemToCart={() => onAddItemToCart(index)}
           />
         );
