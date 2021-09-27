@@ -8,3 +8,6 @@ export const truthyCar = (car: Car) => {
 }
 
 export const GUEST_COOKIE_NAME = "guestCookie";
+
+export const validateTextField = (value: any) => value.trim() !== '';
+export const validateEmailField = (value: any) => validateTextField(value) && value.includes('@');

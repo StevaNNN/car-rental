@@ -24,6 +24,7 @@ const productsSlice = createSlice({
   initialState: initialState,
   reducers: {
     replaceProducts: (state, action:PayloadAction<Car[]>) => {
+      console.log(action.payload)
       return action.payload
     }
   }

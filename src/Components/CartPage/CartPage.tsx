@@ -5,7 +5,7 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import { cartState } from "../../store/cart-store";
 import { Car } from "../types";
-import { truthyCar } from "../../util";
+import {truthyCar, validateEmailField, validateTextField} from "../../util";
 import useField from "../../hooks/use-field";
 import { sendItemToCart } from "../../actions/cart-actions";
 import { guestState } from "../../store/guest-store";
@@ -41,7 +41,7 @@ const CartPage = () => {
     valueBlurHandler: nameBlurHandler,
     valueChangeHandler: nameChangeHandler,
     reset: nameReset
-  } = useField((value: string) => value.trim() !== '');
+  } = useField((value: any) => validateTextField(value));
 
   const {
     value: lastName,
@@ -50,7 +50,7 @@ const CartPage = () => {
     valueBlurHandler: lastNameBlurHandler,
     valueChangeHandler: lastNameChangeHandler,
     reset: lastNameReset
-  } = useField((value: string) => value.trim() !== '');
+  } = useField((value: any) => validateTextField(value));
 
   const {
     value: age,
@@ -59,7 +59,7 @@ const CartPage = () => {
     valueBlurHandler: ageBlurHandler,
     valueChangeHandler: ageChangeHandler,
     reset: ageReset
-  } = useField((value: string) => value.trim() !== '');
+  } = useField((value: any) => validateTextField(value));
 
   const {
     value: phone,
@@ -68,7 +68,7 @@ const CartPage = () => {
     valueBlurHandler: phoneBlurHandler,
     valueChangeHandler: phoneChangeHandler,
     reset: phoneReset
-  } = useField((value: string) => value.trim() !== '');
+  } = useField((value: any) => validateTextField(value));
 
   const {
     value: address,
@@ -77,7 +77,7 @@ const CartPage = () => {
     valueBlurHandler: addressBlurHandler,
     valueChangeHandler: addressChangeHandler,
     reset: addressReset
-  } = useField((value: string) => value.trim() !== '');
+  } = useField((value: any) => validateTextField(value));
 
   const {
     value: email,
@@ -86,7 +86,7 @@ const CartPage = () => {
     valueBlurHandler: emailBlurHandler,
     valueChangeHandler: emailChangeHandler,
     reset: emailReset
-  } = useField((value: string) => value.trim() !== '' && value.includes('@'));
+  } = useField((value: string) => validateEmailField(value));
 
   const {
     value: city,
@@ -95,7 +95,7 @@ const CartPage = () => {
     valueBlurHandler: cityBlurHandler,
     valueChangeHandler: cityChangeHandler,
     reset: cityReset
-  } = useField((value: string) => value.trim() !== '');
+  } = useField((value: any) => validateTextField(value));
 
   const {
     value: zip,
@@ -104,7 +104,7 @@ const CartPage = () => {
     valueBlurHandler: zipBlurHandler,
     valueChangeHandler: zipChangeHandler,
     reset: zipReset
-  } = useField((value: string) => value.trim() !== '');
+  } = useField((value: any) => validateTextField(value));
 
   if(
     nameIsValid &&

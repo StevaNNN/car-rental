@@ -31,11 +31,9 @@ export const getCarData = () => {
           extraDriver: carList[key].extraDriver
         })
       }
-      dispatch(replaceProducts(dataArray))
+      dispatch(replaceProducts(dataArray));
     } catch (error) {
       alert(error)
     }
   }
 }
-
-// export const
