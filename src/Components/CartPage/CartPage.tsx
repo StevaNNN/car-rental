@@ -5,7 +5,7 @@ import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
 import { cartState } from "../../store/cart-store";
 import { Car } from "../types";
-import {truthyCar, validateEmailField, validateTextField} from "../../util";
+import { truthyCar, validateEmailField, validateTextField } from "../../util";
 import useField from "../../hooks/use-field";
 import { sendItemToCart } from "../../actions/cart-actions";
 import { guestState } from "../../store/guest-store";
@@ -106,7 +106,7 @@ const CartPage = () => {
     reset: zipReset
   } = useField((value: any) => validateTextField(value));
 
-  if(
+  if (
     nameIsValid &&
     lastNameIsValid &&
     ageIsValid &&
@@ -120,27 +120,28 @@ const CartPage = () => {
 
   const onFormSubmit = (e: any) => {
     e.preventDefault();
-    if(!formIsValid) {
+
+    if (!formIsValid) {
       return;
     }
 
+    setIsDialogVisible(true)
+
     // combine objects for sending data to redux store
     dispatch(sendItemToCart({
-     selectedCar: {...guestData},
-     userData: {
-       name: name,
-       lastName: lastName,
-       email: email,
-       phone: phone,
-       city: city,
-       zipCode: zip,
-       age: age,
-       address: address
-     },
+      selectedCar: { ...guestData },
+      userData: {
+        name: name,
+        lastName: lastName,
+        email: email,
+        phone: phone,
+        city: city,
+        zipCode: zip,
+        age: age,
+        address: address
+      },
       totalCost: guestData.price
     }));
-
-    setIsDialogVisible(true)
 
     nameReset();
     lastNameReset();
@@ -150,6 +151,7 @@ const CartPage = () => {
     emailReset();
     cityReset();
     zipReset();
+    setIsDialogVisible(false)
   }
 
   useEffect(() => {
@@ -161,19 +163,19 @@ const CartPage = () => {
       <Container flex1>
         <ul className="cart-items">
           {truthyCar(selectedCar) && <ProductItem
-              name={name}
-              model={selectedCar.model}
-              price={selectedCar.price}
-              img={selectedCar.img}
-              airCondition={selectedCar.airCondition}
-              transmission={selectedCar.transmission}
-              luggage={selectedCar.luggage}
-              doors={selectedCar.doors}
-              passengers={selectedCar.passengers}
-              trailer={selectedCar.trailer}
-              gps={selectedCar.gps}
-              childSeat={selectedCar.childSeat}
-              extraDriver={selectedCar.extraDriver}
+            name={name}
+            model={selectedCar.model}
+            price={selectedCar.price}
+            img={selectedCar.img}
+            airCondition={selectedCar.airCondition}
+            transmission={selectedCar.transmission}
+            luggage={selectedCar.luggage}
+            doors={selectedCar.doors}
+            passengers={selectedCar.passengers}
+            trailer={selectedCar.trailer}
+            gps={selectedCar.gps}
+            childSeat={selectedCar.childSeat}
+            extraDriver={selectedCar.extraDriver}
           />}
         </ul>
       </Container>

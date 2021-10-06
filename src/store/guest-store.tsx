@@ -24,7 +24,7 @@ const guestSlice = createSlice({
   name: `${nameSpace}`,
   initialState: initialState,
   reducers: {
-    updateCookie: (state, action:PayloadAction<Car>) => {
+    updateCookie: (state, action: PayloadAction<Car>) => {
       return action.payload
     }
   }

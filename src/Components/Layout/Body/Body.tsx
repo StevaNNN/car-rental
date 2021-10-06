@@ -16,9 +16,6 @@ const Body = () => {
       htmlTag={'main'}
     >
       <Switch>
-        <Route path={'/'} exact>
-          <Redirect to={'/home'}/>
-        </Route>
         <Route path={'/home'}>
           <HomePage />
         </Route>
@@ -37,6 +34,7 @@ const Body = () => {
         <Route path={'/cart'}>
           <CartPage />
         </Route>
+        <Redirect to={'/home'}/>
       </Switch>
     </Container>
   )

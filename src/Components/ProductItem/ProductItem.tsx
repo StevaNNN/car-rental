@@ -26,9 +26,9 @@ const ProductItem = (props: any) => {
       }}
       htmlTag={'li'}
     >
-      <p>Car name is: {name}</p>
-      <p>Car model is: {model}</p>
-      <p>Car price is : {price}</p>
+      <p>{name && `Car name is: ${name}`}</p>
+      <p>{model && `Car model is: ${model}`}</p>
+      <p>{price && `Car price is : ${price}`}</p>
       <p>{airCondition && 'Car has air condition'} </p>
       <p>{transmission && `Car has ${transmission} transmission`}</p>
       <p>{luggage && `Car supports ${luggage} of bags`}</p>

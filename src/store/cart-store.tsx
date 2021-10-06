@@ -1,39 +1,39 @@
-import {createSlice, PayloadAction} from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { CartItem } from "../Components/types";
 import store from "./index";
 
 const initialState: CartItem[] = [{
-    selectedCar: {
-      name: '',
-      model: '',
-      price: '',
-      img: '',
-      airCondition: false,
-      transmission: '',
-      luggage: '',
-      doors: null,
-      passengers: null,
-      pickUpAddress: '',
-      leaveAddress: '',
-      pickUpDate: '',
-      leaveDate: '',
-      trailer: false,
-      gps: false,
-      childSeat: false,
-      extraDriver: false
-    },
-    userData: {
-      name: '',
-      lastName: '',
-      age: '',
-      phone: '',
-      email: '',
-      address: '',
-      city: '',
-      zipCode: ''
-    },
-    totalCost: ''
-  }
+  selectedCar: {
+    name: '',
+    model: '',
+    price: '',
+    img: '',
+    airCondition: false,
+    transmission: '',
+    luggage: '',
+    doors: null,
+    passengers: null,
+    pickUpAddress: '',
+    leaveAddress: '',
+    pickUpDate: '',
+    leaveDate: '',
+    trailer: false,
+    gps: false,
+    childSeat: false,
+    extraDriver: false
+  },
+  userData: {
+    name: '',
+    lastName: '',
+    age: '',
+    phone: '',
+    email: '',
+    address: '',
+    city: '',
+    zipCode: ''
+  },
+  totalCost: ''
+}
 ];
 
 const nameSpace = 'cart';

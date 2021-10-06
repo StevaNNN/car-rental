@@ -23,8 +23,7 @@ const productsSlice = createSlice({
   name: `${nameSpace}`,
   initialState: initialState,
   reducers: {
-    replaceProducts: (state, action:PayloadAction<Car[]>) => {
-      console.log(action.payload)
+    replaceProducts: (state, action: PayloadAction<Car[]>) => {
       return action.payload
     }
   }
