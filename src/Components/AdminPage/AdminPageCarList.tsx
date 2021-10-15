@@ -8,11 +8,12 @@ type PROPS = {
 }
 
 const AdminPageCarList = (props: PROPS) => {
+  const {products} = props;
 
   return (
     <ul>
       <h1>Products list:</h1>
-      {props.products.map((product: Car, index: number) => {
+      {products.map((product: Car, index: number) => {
         return (
           truthyCar(product) && <ProductItem
             key={index}

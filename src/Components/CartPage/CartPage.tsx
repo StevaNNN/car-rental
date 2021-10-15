@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Container from "../UI/Container/Container";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
-import { cartState } from "../../store/cart-store";
+// import { cartState } from "../../store/cart-store";
 import { Car } from "../types";
 import { truthyCar, validateEmailField, validateTextField } from "../../util";
 import useField from "../../hooks/use-field";
@@ -14,7 +14,7 @@ import ProductItem from "../ProductItem/ProductItem";
 
 const CartPage = () => {
   const dispatch = useDispatch();
-  const cartData = useSelector((state: cartState) => state.cart);
+  // const cartData = useSelector((state: cartState) => state.cart);
   const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
   const guestData = useSelector((state: guestState) => state.guest);
   const [selectedCar, setSelectedCar] = useState<Car>({

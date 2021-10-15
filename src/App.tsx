@@ -7,7 +7,7 @@ import classes from './App.module.scss';
 import './Theme/main.scss';
 import { useDispatch } from "react-redux";
 import { getCarData } from "./actions/product-actions";
-import { guestState, updateCookie } from "./store/guest-store";
+import { updateCookie } from "./store/guest-store";
 import { withCookies } from "react-cookie";
 
 const App = (props: any) => {
