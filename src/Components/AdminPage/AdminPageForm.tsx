@@ -2,10 +2,10 @@ import React, { FormEventHandler } from "react";
 import Input from "../UI/Input/Input";
 import CheckboxAndRadio from "../UI/CheckboxAndRadio/CheckboxAndRadio";
 import Button from "../UI/Button/Button";
-import { ICar } from "../types";
+import { Car } from "../types";
 
 type AdminPageFormProps = {
-  data: ICar,
+  data: Car,
   onSubmit: FormEventHandler<HTMLFormElement>,
   dispatch: any
 }

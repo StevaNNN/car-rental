@@ -1,7 +1,25 @@
 import Container from "../UI/Container/Container";
 import Button from "../UI/Button/Button";
 
-const ProductItem = (props: any) => {
+type PROPS = {
+  name?: string,
+  model?: string,
+  price?: string,
+  img?: string,
+  airCondition?: boolean | any,
+  transmission?: string,
+  luggage?: string,
+  doors?: string,
+  passengers?: string,
+  trailer?: boolean | any,
+  gps?: boolean | any,
+  childSeat?: boolean | any,
+  deleteItem?: any,
+  addItemToCart?: any,
+  adminPage?: boolean,
+  productsPage?: boolean
+}
+const ProductItem = (props: PROPS) => {
 
   const {
     name,
@@ -12,8 +30,10 @@ const ProductItem = (props: any) => {
     luggage,
     doors,
     passengers,
-    addItemToCart,
-    productsPage
+    productsPage,
+    adminPage,
+    deleteItem,
+    addItemToCart
   } = props;
 
   return (
@@ -37,6 +57,7 @@ const ProductItem = (props: any) => {
       {productsPage && <Button onClick={addItemToCart}>
         Add to cart
       </Button>}
+      {adminPage && <Button onClick={deleteItem}>Delete item</Button> }
     </Container>
   )
 }

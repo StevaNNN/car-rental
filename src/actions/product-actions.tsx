@@ -1,6 +1,5 @@
 import instance from "../api";
 import { replaceProducts } from "../store/products-store";
-
 /*
 * Get car list data and replace current product slice state with the one derived from request
 * */
@@ -27,8 +26,7 @@ export const getCarData = () => {
           passengers: carList[key].passengers,
           trailer: carList[key].trailer,
           gps: carList[key].gps,
-          childSeat: carList[key].childSeat,
-          extraDriver: carList[key].extraDriver
+          childSeat: carList[key].childSeat
         })
       }
       dispatch(replaceProducts(dataArray));

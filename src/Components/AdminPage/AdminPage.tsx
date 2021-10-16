@@ -2,30 +2,35 @@ import React, { useReducer, useState } from "react";
 import Button from "../UI/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { productsState } from "../../store/products-store";
-import { sendCarData } from "../../actions/admin-actions";
-import { adminFormInitialState, adminFormReducer } from "../../reducers/admin-page-reducer";
+import { removeCarData, sendCarData } from "../../actions/admin-actions";
+import { adminFormReducer } from "../../reducers/admin-page-reducer";
 import Dialog from "../UI/Dialog/Dialog";
 import AdminPageCarList from "./AdminPageCarList";
 import AdminPageForm from "./AdminPageForm";
-import { validateForm } from "../../util";
-import { ICar } from "../types";
+import { carInitialState, validateForm } from "../../util";
+import { Car } from "../types";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
   const [dialogOpened, setDialogOpened] = useState(false);
   const products = useSelector((state: productsState) => state.products);
-  const [adminFormState, adminFormDispatch] = useReducer(adminFormReducer, { ...adminFormInitialState });
+  // @ts-ignore
+  const [adminFormState, adminFormDispatch] = useReducer(adminFormReducer, { ...carInitialState });
 
   const formSubmitHandler = (e: any) => {
     e.preventDefault();
 
-    const newCar: ICar = adminFormState;
+    const newCar: Car = adminFormState;
     if (validateForm(newCar)) {
       dispatch(sendCarData(newCar))
     }
     // @ts-ignore
-    adminFormDispatch({ type: 'RESET', payload: { ...adminFormInitialState } });
+    adminFormDispatch({ type: 'RESET', payload: { ...carInitialState } });
     setDialogOpened(false);
+  }
+
+  const deleteItemHandler = (index: number) => {
+    dispatch(removeCarData(index));
   }
 
   return (
@@ -47,7 +52,10 @@ const AdminPage = () => {
           dispatch={adminFormDispatch}
         />
       </Dialog>
-      <AdminPageCarList products={products} />
+      <AdminPageCarList
+        products={products}
+        deleteItem={deleteItemHandler}
+      />
     </>
   );
 }

@@ -6,7 +6,7 @@ import App from './App';
 import store from "./store";
 import { CookiesProvider } from "react-cookie";
 let packageJson = require('../package.json');
-
+console.log(store.getState())
 ReactDOM.render(
   <Provider store={store}>
     <Router basename={packageJson.homepage}>

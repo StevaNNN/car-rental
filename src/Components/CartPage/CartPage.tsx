@@ -3,9 +3,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Container from "../UI/Container/Container";
 import Input from "../UI/Input/Input";
 import Button from "../UI/Button/Button";
-import { cartState } from "../../store/cart-store";
+// import { cartState } from "../../store/cart-store";
 import { Car } from "../types";
-import { truthyCar, validateEmailField, validateTextField } from "../../util";
+import { validateEmailField, validateTextField } from "../../util";
 import useField from "../../hooks/use-field";
 import { sendItemToCart } from "../../actions/cart-actions";
 import { guestState } from "../../store/guest-store";
@@ -14,7 +14,7 @@ import ProductItem from "../ProductItem/ProductItem";
 
 const CartPage = () => {
   const dispatch = useDispatch();
-  const cartData = useSelector((state: cartState) => state.cart);
+  // const cartData = useSelector((state: cartState) => state.cart);
   const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
   const guestData = useSelector((state: guestState) => state.guest);
   const [selectedCar, setSelectedCar] = useState<Car>({
@@ -25,12 +25,11 @@ const CartPage = () => {
     airCondition: false,
     transmission: '',
     luggage: '',
-    doors: null,
-    passengers: null,
+    doors: '',
+    passengers: '',
     trailer: false,
     gps: false,
-    childSeat: false,
-    extraDriver: false
+    childSeat: false
   });
   let formIsValid = false;
 
@@ -162,7 +161,7 @@ const CartPage = () => {
     <Container className="cart-page" hBox>
       <Container flex1>
         <ul className="cart-items">
-          {truthyCar(selectedCar) && <ProductItem
+          <ProductItem
             name={name}
             model={selectedCar.model}
             price={selectedCar.price}
@@ -175,8 +174,7 @@ const CartPage = () => {
             trailer={selectedCar.trailer}
             gps={selectedCar.gps}
             childSeat={selectedCar.childSeat}
-            extraDriver={selectedCar.extraDriver}
-          />}
+          />
         </ul>
       </Container>
       <Container vBox>
@@ -220,7 +218,7 @@ const CartPage = () => {
       >
         <h1>Make sure that these infos are coorect before reservation</h1>
         <ul className="cart-items">
-          {truthyCar(selectedCar) && <li
+          <li
             style={{
               border: '1px solid black',
               padding: '20px',
@@ -230,7 +228,7 @@ const CartPage = () => {
             <p>{selectedCar.name}</p>
             <p>{selectedCar.model}</p>
             <p>{selectedCar.price}</p>
-          </li>}
+          </li>
         </ul>
         <p>Name is: {name}</p>
         <p>Last name is: {lastName}</p>

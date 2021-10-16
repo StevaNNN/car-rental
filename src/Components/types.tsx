@@ -1,4 +1,4 @@
-export type ICar = {
+export type Car = {
   name: string,
   model: string,
   price: string,
@@ -13,28 +13,16 @@ export type ICar = {
   childSeat: boolean | any
 }
 
-export type Car = {
-  name: string | null,
-  model: string | null,
-  price: string | null,
-  img?: string | null,
-  airCondition?: boolean,
-  transmission?: string,
-  luggage?: string,
-  doors?: string | null | any,
-  passengers?: string | null,
+export type CarAdditional = {
   pickUpAddress?: string,
   leaveAddress?: string,
   pickUpDate?: string,
-  leaveDate?: string,
-  trailer?: boolean,
-  gps?: boolean,
-  childSeat?: boolean,
+  leaveDate?: string
   extraDriver?: boolean
 }
 
 export type CartItem = {
-  selectedCar: Car,
+  selectedCar: Car | any,
   userData: UserInfo,
   totalCost: string | null
 }

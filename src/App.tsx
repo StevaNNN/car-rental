@@ -7,33 +7,37 @@ import classes from './App.module.scss';
 import './Theme/main.scss';
 import { useDispatch } from "react-redux";
 import { getCarData } from "./actions/product-actions";
-import { guestState, updateCookie } from "./store/guest-store";
+import { updateCookie } from "./store/guest-store";
 import { withCookies } from "react-cookie";
+import { GUEST_COOKIE_NAME } from "./util";
 
 const App = (props: any) => {
   const dispatch = useDispatch();
   // const guestData = useSelector((state: guestState) => state.guest);
 
-  const {
-    allCookies
-  } = props;
+  const { allCookies } = props;
+
   useEffect(() => {
     dispatch(getCarData());
     if(allCookies && Object.keys(allCookies).length > 0) {
       dispatch(updateCookie({
-        name: allCookies["guest-cookie"].name,
-        model: allCookies["guest-cookie"].model,
-        price: allCookies["guest-cookie"].price,
-        img: allCookies["guest-cookie"].img,
-        airCondition: allCookies["guest-cookie"].airCondition,
-        transmission: allCookies["guest-cookie"].transmission,
-        luggage: allCookies["guest-cookie"].luggage,
-        doors: allCookies["guest-cookie"].doors,
-        passengers: allCookies["guest-cookie"].passengers,
-        trailer: allCookies["guest-cookie"].trailer,
-        gps: allCookies["guest-cookie"].gps,
-        childSeat: allCookies["guest-cookie"].childSeat,
-        extraDriver: allCookies["guest-cookie"].extraDriver,
+        name: allCookies[GUEST_COOKIE_NAME].name,
+        model: allCookies[GUEST_COOKIE_NAME].model,
+        price: allCookies[GUEST_COOKIE_NAME].price,
+        img: allCookies[GUEST_COOKIE_NAME].img,
+        airCondition: allCookies[GUEST_COOKIE_NAME].airCondition,
+        transmission: allCookies[GUEST_COOKIE_NAME].transmission,
+        luggage: allCookies[GUEST_COOKIE_NAME].luggage,
+        doors: allCookies[GUEST_COOKIE_NAME].doors,
+        passengers: allCookies[GUEST_COOKIE_NAME].passengers,
+        pickUpAddress: allCookies[GUEST_COOKIE_NAME].pickUpAddress,
+        leaveAddress: allCookies[GUEST_COOKIE_NAME].leaveAddress,
+        pickUpDate: allCookies[GUEST_COOKIE_NAME].pickUpDate,
+        leaveDate: allCookies[GUEST_COOKIE_NAME].leaveDate,
+        trailer: allCookies[GUEST_COOKIE_NAME].trailer,
+        gps: allCookies[GUEST_COOKIE_NAME].gps,
+        childSeat: allCookies[GUEST_COOKIE_NAME].childSeat,
+        extraDriver: allCookies[GUEST_COOKIE_NAME].extraDriver,
       }));
     }
   }, [allCookies, dispatch]);
