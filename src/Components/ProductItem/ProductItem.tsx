@@ -16,6 +16,7 @@ type PROPS = {
   childSeat?: boolean | any,
   deleteItem?: any,
   addItemToCart?: any,
+  editItem?: any,
   adminPage?: boolean,
   productsPage?: boolean
 }
@@ -33,7 +34,8 @@ const ProductItem = (props: PROPS) => {
     productsPage,
     adminPage,
     deleteItem,
-    addItemToCart
+    addItemToCart,
+    editItem
   } = props;
 
   return (
@@ -57,7 +59,10 @@ const ProductItem = (props: PROPS) => {
       {productsPage && <Button onClick={addItemToCart}>
         Add to cart
       </Button>}
-      {adminPage && <Button onClick={deleteItem}>Delete item</Button> }
+      {adminPage && [
+        <Button onClick={deleteItem}>Delete item</Button>,
+        <Button onClick={editItem}>Edit item</Button>
+      ]}
     </Container>
   )
 }

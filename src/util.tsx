@@ -41,3 +41,26 @@ export function removeItemOnce(arr: any, value: number) {
   }
   return arr;
 }
+
+export const firebaseObjectsToArray = (dataFromFirebase: any) => {
+  let cars: Car[] = [];
+
+  for (const data in dataFromFirebase) {
+    cars.push({
+      name: dataFromFirebase[data].name,
+      model: dataFromFirebase[data].model,
+      price: dataFromFirebase[data].price,
+      img: dataFromFirebase[data].img,
+      airCondition: dataFromFirebase[data].airCondition,
+      transmission: dataFromFirebase[data].transmission,
+      luggage: dataFromFirebase[data].luggage,
+      doors: dataFromFirebase[data].doors,
+      passengers: dataFromFirebase[data].passengers,
+      trailer: dataFromFirebase[data].trailer,
+      gps: dataFromFirebase[data].gps,
+      childSeat: dataFromFirebase[data].childSeat
+    })
+  }
+
+  return cars;
+}

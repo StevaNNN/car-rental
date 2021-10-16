@@ -4,11 +4,12 @@ import ProductItem from "../ProductItem/ProductItem";
 
 type PROPS = {
   products: Car[],
-  deleteItem: any
+  deleteItem: any,
+  editItem: any
 }
 
 const AdminPageCarList = (props: PROPS) => {
-  const { products, deleteItem } = props;
+  const { products, deleteItem, editItem} = props;
   return (
     <ul>
       <h1>Products list:</h1>
@@ -30,6 +31,7 @@ const AdminPageCarList = (props: PROPS) => {
             childSeat={product.childSeat}
             adminPage
             deleteItem={() => deleteItem(index)}
+            editItem={() => editItem(index)}
           />
         );
       })}

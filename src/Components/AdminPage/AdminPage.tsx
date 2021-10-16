@@ -2,7 +2,7 @@ import React, { useReducer, useState } from "react";
 import Button from "../UI/Button/Button";
 import { useDispatch, useSelector } from "react-redux";
 import { productsState } from "../../store/products-store";
-import { removeCarData, sendCarData } from "../../actions/admin-actions";
+import { editCarData, removeCarData, sendCarData } from "../../actions/admin-actions";
 import { adminFormReducer } from "../../reducers/admin-page-reducer";
 import Dialog from "../UI/Dialog/Dialog";
 import AdminPageCarList from "./AdminPageCarList";
@@ -33,6 +33,10 @@ const AdminPage = () => {
     dispatch(removeCarData(index));
   }
 
+  const editItemHandler = (index: number) => {
+    dispatch(editCarData(index))
+  }
+
   return (
     <>
       <Button
@@ -55,6 +59,7 @@ const AdminPage = () => {
       <AdminPageCarList
         products={products}
         deleteItem={deleteItemHandler}
+        editItem={editItemHandler}
       />
     </>
   );
