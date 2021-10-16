@@ -6,11 +6,11 @@ import { replaceProducts } from "../store/products-store";
 
 export const sendCarData = (carData: Car) => {
   return async (dispatch: any) => {
-    const sendRequest = async () => {
+    const sendCar = async () => {
       await instance.post('/carList.json', carData);
     }
     try {
-      await sendRequest();
+      await sendCar();
       dispatch(getCarData());
     } catch (error) {
       alert(error)
@@ -20,17 +20,19 @@ export const sendCarData = (carData: Car) => {
 
 export const removeCarData = (index: number) => {
   return async (dispatch: any) => {
-    const sendRequest = async () => {
+    const getCars = async () => {
       const request = await instance.get('/carList.json');
       return await request.data;
     }
-    const sendRequest2 = async (carData: any) => {
-      const request = await instance.delete('/carList.json')
+    const deleteCar = async (carData: any) => {
+      const req = await instance.delete('/carList.json', {data: carData.id});
+      return await  req.data;
     }
     try {
-      const carList = await sendRequest();
+      // storing items from firebase
+      const carList = await getCars();
+      // parsing data derived from firebase
       let dataArray = [];
-
       for (const key in carList) {
         dataArray.push({
           id: key,
@@ -49,7 +51,11 @@ export const removeCarData = (index: number) => {
         });
 
       }
+      // preparing new array for products store without deleted item
       const newDataArray = dataArray.filter((s: any, idx: number) => idx !== index);
+      // deleting item from database
+      dataArray.map((d:any, idx: number) => idx === index ? deleteCar(d): null);
+      // replacing products store
       dispatch(replaceProducts(newDataArray));
     } catch (error) {
       alert(error)
