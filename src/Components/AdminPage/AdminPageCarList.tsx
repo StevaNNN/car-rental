@@ -1,6 +1,5 @@
 import React from "react";
 import { Car } from "../types";
-import { truthyCar } from "../../util";
 import ProductItem from "../ProductItem/ProductItem";
 
 type PROPS = {
@@ -8,13 +7,12 @@ type PROPS = {
 }
 
 const AdminPageCarList = (props: PROPS) => {
-
   return (
     <ul>
       <h1>Products list:</h1>
       {props.products.map((product: Car, index: number) => {
         return (
-          truthyCar(product) && <ProductItem
+          <ProductItem
             key={index}
             name={product.name}
             model={product.model}
