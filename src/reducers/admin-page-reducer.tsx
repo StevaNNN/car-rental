@@ -1,4 +1,19 @@
-import {Car} from "../Components/types";
+import {ICar} from "../Components/types";
+
+export const adminFormInitialState = {
+    name: '',
+    model: '',
+    price: '',
+    img: '',
+    airCondition: false,
+    transmission: '',
+    luggage: '',
+    doors: '',
+    passengers: '',
+    trailer: false,
+    gps: false,
+    childSeat: false
+}
 
 type Action =
     { type: 'NAME', payload: string } |
@@ -6,15 +21,16 @@ type Action =
     { type: 'PRICE', payload: string } |
     { type: 'IMG', payload: string } |
     { type: 'AIR', payload: boolean } |
-    { type: 'TRANS', payload: string} |
+    { type: 'TRANS', payload: string } |
     { type: 'LUGGAGE', payload: string } |
     { type: 'DOORS', payload: string } |
     { type: 'PASSENGERS', payload: string } |
     { type: 'TRAILER', payload: boolean } |
     { type: 'GPS', payload: boolean } |
-    { type: 'CHILD', payload: boolean }
+    { type: 'CHILD', payload: boolean } |
+    { type: 'RESET', payload: ICar }
 
-export function adminReducer(state: Car, action: Action): any {
+export function adminFormReducer(state: ICar, action: Action): ICar {
     switch (action.type) {
         case 'NAME':
             return {...state, name: action.payload}
@@ -40,5 +56,7 @@ export function adminReducer(state: Car, action: Action): any {
             return {...state, gps: action.payload}
         case 'CHILD':
             return {...state, childSeat: action.payload}
+        case "RESET":
+            return {...action.payload}
     }
 }

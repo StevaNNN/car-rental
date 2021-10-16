@@ -1,3 +1,18 @@
+export type ICar = {
+  name: string,
+  model: string,
+  price: string,
+  img?: string,
+  airCondition: boolean | any,
+  transmission: string,
+  luggage: string,
+  doors: string,
+  passengers: string,
+  trailer: boolean | any,
+  gps: boolean | any,
+  childSeat: boolean | any
+}
+
 export type Car = {
   name: string | null,
   model: string | null,
