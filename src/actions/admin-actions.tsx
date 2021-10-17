@@ -1,4 +1,4 @@
-import { deleteCar, getCars, sendCar } from "../api";
+import { deleteCar, getCars, sendCar, updateCar } from "../api";
 import { Car } from "../Components/types";
 import { getCarData } from "./product-actions";
 import { replaceProducts } from "../store/products-store";
@@ -34,8 +34,17 @@ export const removeCarData = (index: number) => {
   }
 }
 
-export const editCarData = (index: number) => {
+export const editCarData = (index: number, newCarData: Car) => {
   return async (dispatch: any) => {
-
+    // storing items from firebase
+    const carList = await getCars();
+    // parsing data derived from firebase
+    const cars = firebaseObjectsToArray(carList);
+    cars.map((car: Car, idx: number) => {
+      if(idx === index) {
+        updateCar(car.id, newCarData)
+      }
+    });
+    dispatch(replaceProducts(cars))
   }
 }

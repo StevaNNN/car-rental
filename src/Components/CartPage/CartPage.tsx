@@ -162,6 +162,7 @@ const CartPage = () => {
       <Container flex1>
         <ul className="cart-items">
           <ProductItem
+            key={name}
             name={name}
             model={selectedCar.model}
             price={selectedCar.price}

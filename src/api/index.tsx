@@ -8,6 +8,7 @@ const instance = axios.create({
 export default instance;
 
 export const sendCar = async (carData: Car) => await instance.post('/carList.json', carData);
+export const updateCar = async (index: number, newCarData: Car) => await instance.put('/carList.json', newCarData);
 export const sendCartItem = async (cartItem: CartItem) => {
   const request = await instance.post('/cartList.json', cartItem);
   return await request.data

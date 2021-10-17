@@ -34,7 +34,8 @@ const AdminPage = () => {
   }
 
   const editItemHandler = (index: number) => {
-    dispatch(editCarData(index))
+    const editedCar: Car = {...carInitialState};
+    dispatch(editCarData(index, editedCar))
   }
 
   return (
