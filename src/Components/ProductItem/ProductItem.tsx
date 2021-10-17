@@ -59,10 +59,10 @@ const ProductItem = (props: PROPS) => {
       {productsPage && <Button onClick={addItemToCart}>
         Add to cart
       </Button>}
-      {adminPage && [
+      {adminPage && <>
         <Button onClick={deleteItem}>Delete item</Button>,
         <Button onClick={editItem}>Edit item</Button>
-      ]}
+      </>}
     </Container>
   )
 }

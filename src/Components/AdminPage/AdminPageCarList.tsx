@@ -16,7 +16,6 @@ const AdminPageCarList = (props: PROPS) => {
       <h1>Products list:</h1>
       <Container hBox>
         {products.map((product: Car, index: number) => {
-          console.log(product)
           return (
             <ProductItem
               key={index}
