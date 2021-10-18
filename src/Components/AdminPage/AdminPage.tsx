@@ -34,7 +34,20 @@ const AdminPage = () => {
   }
 
   const editItemHandler = (index: number) => {
-    const editedCar: Car = {...carInitialState};
+    const editedCar: Car = {
+      name: 'test',
+      model: 'test',
+      price: 'test',
+      img: 'test',
+      airCondition: false,
+      transmission: 'test',
+      luggage: 'test',
+      doors: 'test',
+      passengers: 'test',
+      trailer: false,
+      gps: false,
+      childSeat: false,
+    };
     dispatch(editCarData(index, editedCar))
   }
 

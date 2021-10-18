@@ -47,6 +47,7 @@ export const firebaseObjectsToArray = (dataFromFirebase: any) => {
 
   for (const data in dataFromFirebase) {
     cars.push({
+      id: data,
       name: dataFromFirebase[data].name,
       model: dataFromFirebase[data].model,
       price: dataFromFirebase[data].price,

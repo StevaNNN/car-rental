@@ -1,4 +1,4 @@
-import { deleteCar, getCars, sendCar, updateCar } from "../api";
+import { deleteCar, getCarById, getCars, sendCar, updateCar } from "../api";
 import { Car } from "../Components/types";
 import { getCarData } from "./product-actions";
 import { replaceProducts } from "../store/products-store";
@@ -25,7 +25,7 @@ export const removeCarData = (index: number) => {
       // preparing new array for products store without deleted item
       const newCars = cars.filter((car: Car, idx: number) => idx !== index);
       // deleting item from database
-      cars.map((car: Car, idx: number) => idx === index ? deleteCar(car) : null);
+      cars.forEach((car: Car, idx: number) => idx === index ? deleteCar(car) : null);
       // replacing products store
       dispatch(replaceProducts(newCars));
     } catch (error) {
@@ -40,11 +40,16 @@ export const editCarData = (index: number, newCarData: Car) => {
     const carList = await getCars();
     // parsing data derived from firebase
     const cars = firebaseObjectsToArray(carList);
-    cars.map((car: Car, idx: number) => {
+    const r: any[] = [];
+    for (let car of cars) {
+      const idx: number = cars.indexOf(car);
+      let updatedCar: any = {};
       if(idx === index) {
-        updateCar(car.id, newCarData)
+        await updateCar(car.id, { ...newCarData, id: car.id });
+        updatedCar = await getCarById(car.id);
+        car = updatedCar
       }
-    });
-    dispatch(replaceProducts(cars))
+    }
+    dispatch(replaceProducts(cars));
   }
 }
