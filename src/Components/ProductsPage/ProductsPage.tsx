@@ -38,6 +38,7 @@ const ProductsPage = () => {
             childSeat={product.childSeat}
             productsPage
             addItemToCart={() => onAddItemToCart(index)}
+            id={product.id}
           />
         );
       })}

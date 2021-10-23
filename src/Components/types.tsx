@@ -3,15 +3,15 @@ export type Car = {
   name: string,
   model: string,
   price: string,
-  img?: string,
-  airCondition: boolean | any,
+  img: string,
+  airCondition: boolean | undefined,
   transmission: string,
   luggage: string,
   doors: string,
   passengers: string,
-  trailer: boolean | any,
-  gps: boolean | any,
-  childSeat: boolean | any
+  trailer: boolean | undefined,
+  gps: boolean | undefined,
+  childSeat: boolean | undefined,
 }
 
 export type CarAdditional = {

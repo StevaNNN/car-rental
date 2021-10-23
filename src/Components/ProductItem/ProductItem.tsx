@@ -2,18 +2,19 @@ import Container from "../UI/Container/Container";
 import Button from "../UI/Button/Button";
 
 type PROPS = {
-  name?: string,
-  model?: string,
-  price?: string,
-  img?: string,
-  airCondition?: boolean | any,
+  id: any,
+  name: string,
+  model: string,
+  price: string,
+  img: string,
+  airCondition: boolean | undefined,
   transmission?: string,
-  luggage?: string,
-  doors?: string,
-  passengers?: string,
-  trailer?: boolean | any,
-  gps?: boolean | any,
-  childSeat?: boolean | any,
+  luggage: string,
+  doors: string,
+  passengers: string,
+  trailer: boolean | undefined,
+  gps?: boolean | undefined,
+  childSeat?: boolean | undefined,
   deleteItem?: any,
   addItemToCart?: any,
   editItem?: any,
@@ -26,11 +27,15 @@ const ProductItem = (props: PROPS) => {
     name,
     model,
     price,
+    img,
     airCondition,
     transmission,
     luggage,
     doors,
     passengers,
+    trailer,
+    gps,
+    childSeat,
     productsPage,
     adminPage,
     deleteItem,
@@ -52,10 +57,14 @@ const ProductItem = (props: PROPS) => {
       <p>{model && `Car model is: ${model}`}</p>
       <p>{price && `Car price is : ${price}`}</p>
       <p>{airCondition && 'Car has air condition'} </p>
+      <p>{img && `Car image is ${img}`}</p>
       <p>{transmission && `Car has ${transmission} transmission`}</p>
       <p>{luggage && `Car supports ${luggage} of bags`}</p>
       <p>{doors && `Car has ${doors} doors`}</p>
       <p>{passengers && `Car accepts ${passengers} passengers`}</p>
+      <p>{trailer && 'Car support trailer'}</p>
+      <p>{gps && 'Car has GPS'}</p>
+      <p>{childSeat && 'Car posses child seat'}</p>
       {productsPage && <Button onClick={addItemToCart}>
         Add to cart
       </Button>}

@@ -13,9 +13,10 @@ type Action =
   { type: 'TRAILER', payload: boolean } |
   { type: 'GPS', payload: boolean } |
   { type: 'CHILD', payload: boolean } |
+  { type: 'ALL', payload: Car } |
   { type: 'RESET', payload: Car }
 
-export function adminFormReducer(state: Car, action: Action): Car {
+export function adminEditFormReducer(state: Car, action: Action): Car {
   switch (action.type) {
     case 'NAME':
       return { ...state, name: action.payload }
@@ -41,6 +42,8 @@ export function adminFormReducer(state: Car, action: Action): Car {
       return { ...state, gps: action.payload }
     case 'CHILD':
       return { ...state, childSeat: action.payload }
+    case 'ALL':
+      return { ...action.payload }
     case "RESET":
       return { ...action.payload }
   }

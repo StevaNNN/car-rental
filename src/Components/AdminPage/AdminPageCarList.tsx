@@ -19,10 +19,11 @@ const AdminPageCarList = (props: PROPS) => {
           return (
             <ProductItem
               key={index}
+              id={product.id}
               name={product.name}
               model={product.model}
               price={product.price}
-              img={product.img}
+              img={product && product.img}
               airCondition={product.airCondition}
               transmission={product.transmission}
               luggage={product.luggage}
@@ -32,8 +33,8 @@ const AdminPageCarList = (props: PROPS) => {
               gps={product.gps}
               childSeat={product.childSeat}
               adminPage
-              deleteItem={() => deleteItem(index)}
-              editItem={() => editItem(index)}
+              deleteItem={() => deleteItem(product.id)}
+              editItem={() => editItem(product.id)}
             />
           );
         })}

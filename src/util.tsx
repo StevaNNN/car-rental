@@ -34,6 +34,7 @@ export const carInitialState: Car = {
   gps: false,
   childSeat: false,
 }
+
 export function removeItemOnce(arr: any, value: number) {
   var index = arr.indexOf(value);
   if (index > -1) {

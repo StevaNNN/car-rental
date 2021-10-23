@@ -40,7 +40,7 @@ const AdminPageForm = (props: AdminPageFormProps) => {
       <CheckboxAndRadio
         label={"Car has Air Condition(Yes/No)?"}
         type="checkbox"
-        value={data.airCondition}
+        checked={data.airCondition}
         onChange={(e: any) => dispatch({ type: 'AIR', payload: e.target.checked })}
       />
       <Input
@@ -76,20 +76,20 @@ const AdminPageForm = (props: AdminPageFormProps) => {
       <CheckboxAndRadio
         label={"Car has trailer?: "}
         type={"checkbox"}
-        value={data.trailer}
-        onChange={(e: any) => dispatch({ type: 'TRAILER', payload: e.target.value })}
+        checked={data.trailer}
+        onChange={(e: any) => dispatch({ type: 'TRAILER', payload: e.target.checked })}
       />
       <CheckboxAndRadio
         label={"Car has GPS?: "}
         type={"checkbox"}
-        value={data.gps}
-        onChange={(e: any) => dispatch({ type: 'GPS', payload: e.target.value })}
+        checked={data.gps}
+        onChange={(e: any) => dispatch({ type: 'GPS', payload: e.target.checked })}
       />
       <CheckboxAndRadio
         label={"Car supports Child Seat?: "}
         type={"checkbox"}
-        value={data.childSeat}
-        onChange={(e: any) => dispatch({ type: 'CHILD', payload: e.target.value })}
+        checked={data.childSeat}
+        onChange={(e: any) => dispatch({ type: 'CHILD', payload: e.target.checked })}
       />
       <Button type="submit">
         Submit

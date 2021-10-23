@@ -18,6 +18,7 @@ const CartPage = () => {
   const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
   const guestData = useSelector((state: guestState) => state.guest);
   const [selectedCar, setSelectedCar] = useState<Car>({
+    id: '',
     name: '',
     model: '',
     price: '',
@@ -175,7 +176,7 @@ const CartPage = () => {
             trailer={selectedCar.trailer}
             gps={selectedCar.gps}
             childSeat={selectedCar.childSeat}
-          />
+           id={name}/>
         </ul>
       </Container>
       <Container vBox>

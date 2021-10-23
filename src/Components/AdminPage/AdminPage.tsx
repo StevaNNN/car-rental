@@ -1,80 +1,85 @@
-import React, { useReducer, useState } from "react";
+import React, {useReducer, useState} from "react";
 import Button from "../UI/Button/Button";
-import { useDispatch, useSelector } from "react-redux";
-import { productsState } from "../../store/products-store";
-import { editCarData, removeCarData, sendCarData } from "../../actions/admin-actions";
-import { adminFormReducer } from "../../reducers/admin-page-reducer";
+import {useDispatch, useSelector} from "react-redux";
+import {productsState} from "../../store/products-store";
+import {editCarData, removeCarData, sendCarData} from "../../actions/admin-actions";
+import {adminFormReducer} from "../../reducers/admin-page-form-reducer";
 import Dialog from "../UI/Dialog/Dialog";
 import AdminPageCarList from "./AdminPageCarList";
 import AdminPageForm from "./AdminPageForm";
-import { carInitialState, validateForm } from "../../util";
-import { Car } from "../types";
+import {carInitialState, validateForm} from "../../util";
+import {Car} from "../types";
+import {getCarById} from "../../api";
+import {adminEditFormReducer} from "../../reducers/admin-page-form-edit-reducer";
 
 const AdminPage = () => {
   const dispatch = useDispatch();
-  const [dialogOpened, setDialogOpened] = useState(false);
+  const [addDialogOpened, setAddDialogOpened] = useState(false);
+  const [editDialogOpened, setEditDialogOpened] = useState(false);
   const products = useSelector((state: productsState) => state.products);
-  // @ts-ignore
-  const [adminFormState, adminFormDispatch] = useReducer(adminFormReducer, { ...carInitialState });
+  const [addFormData, addFormDispatch] = useReducer(adminFormReducer, {...carInitialState});
+  const [editFormData, editFormDispatch] = useReducer(adminEditFormReducer, {...carInitialState});
 
-  const formSubmitHandler = (e: any) => {
+  const addFormSubmitHandler = (e: any) => {
     e.preventDefault();
-
-    const newCar: Car = adminFormState;
+    const newCar: Car = addFormData;
     if (validateForm(newCar)) {
-      dispatch(sendCarData(newCar))
+      dispatch(sendCarData(newCar));
     }
-    // @ts-ignore
-    adminFormDispatch({ type: 'RESET', payload: { ...carInitialState } });
-    setDialogOpened(false);
+    addFormDispatch({type: 'RESET', payload: {...carInitialState}});
+    setAddDialogOpened(false);
   }
 
-  const deleteItemHandler = (index: number) => {
-    dispatch(removeCarData(index));
+  const deleteItemHandler = (id: any) => dispatch(removeCarData(id));
+
+  const editFormSubmitHandler = (e: any) => {
+    e.preventDefault();
+    if (validateForm(editFormData)) dispatch(editCarData(editFormData.id, editFormData));
+    editFormDispatch({type: 'RESET', payload: {...carInitialState}});
+    setEditDialogOpened(false);
   }
 
-  const editItemHandler = (index: number) => {
-    const editedCar: Car = {
-      name: 'test',
-      model: 'test',
-      price: 'test',
-      img: 'test',
-      airCondition: false,
-      transmission: 'test',
-      luggage: 'test',
-      doors: 'test',
-      passengers: 'test',
-      trailer: false,
-      gps: false,
-      childSeat: false,
-    };
-    dispatch(editCarData(index, editedCar))
+  const editItemHandler = async (id: any) => {
+    setEditDialogOpened(true);
+    const selectedCarData: Car = await getCarById(id);
+    editFormDispatch({type: 'ALL', payload: {...selectedCarData, id}});
   }
 
   return (
     <>
       <Button
         primary
-        onClick={() => setDialogOpened(true)}
+        onClick={() => setAddDialogOpened(true)}
       >
         Add product
       </Button>
-      <Dialog
-        title={'Add new product'}
-        open={dialogOpened}
-        close={() => setDialogOpened(false)}
-      >
-        <AdminPageForm
-          data={{ ...adminFormState }}
-          onSubmit={formSubmitHandler}
-          dispatch={adminFormDispatch}
-        />
-      </Dialog>
       <AdminPageCarList
         products={products}
         deleteItem={deleteItemHandler}
         editItem={editItemHandler}
       />
+      <Dialog
+        title={'Add new car'}
+        open={addDialogOpened}
+        close={() => setAddDialogOpened(false)}
+      >
+        <AdminPageForm
+          data={{...addFormData}}
+          onSubmit={addFormSubmitHandler}
+          dispatch={addFormDispatch}
+        />
+      </Dialog>
+      <Dialog
+        title={'Edit car'}
+        open={editDialogOpened}
+        close={() => setEditDialogOpened(false)}
+      >
+        <AdminPageForm
+          data={{...editFormData}}
+          onSubmit={editFormSubmitHandler}
+          dispatch={editFormDispatch}
+        />
+      </Dialog>
     </>
   );
 }
