@@ -1,25 +1,29 @@
 export type Car = {
-  name: string | null,
-  model: string | null,
-  price: string | null,
-  img?: string | null,
-  airCondition?: boolean,
-  transmission?: string,
-  luggage?: string,
-  doors?: string | null | any,
-  passengers?: string | null,
+  id?: any,
+  name: string,
+  model: string,
+  price: string,
+  img: string,
+  airCondition: boolean | undefined,
+  transmission: string,
+  luggage: string,
+  doors: string,
+  passengers: string,
+  trailer: boolean | undefined,
+  gps: boolean | undefined,
+  childSeat: boolean | undefined,
+}
+
+export type CarAdditional = {
   pickUpAddress?: string,
   leaveAddress?: string,
   pickUpDate?: string,
-  leaveDate?: string,
-  trailer?: boolean,
-  gps?: boolean,
-  childSeat?: boolean,
+  leaveDate?: string
   extraDriver?: boolean
 }
 
 export type CartItem = {
-  selectedCar: Car,
+  selectedCar: Car | any,
   userData: UserInfo,
   totalCost: string | null
 }

@@ -1,20 +1,10 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { Car } from "../Components/types";
 import store from "./index";
+import { carInitialState } from "../util";
 
 const initialState: Car[] = [{
-  name: '',
-  model: '',
-  price: '',
-  airCondition: false,
-  transmission: '',
-  luggage: '',
-  doors: null,
-  passengers: null,
-  trailer: false,
-  gps: false,
-  childSeat: false,
-  extraDriver: false
+  ...carInitialState
 }];
 
 const nameSpace = 'products';

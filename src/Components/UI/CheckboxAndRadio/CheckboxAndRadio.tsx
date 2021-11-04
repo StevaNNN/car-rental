@@ -6,7 +6,7 @@ import { ChangeEventHandler } from "react";
 
 export type TRT = {
 	value?: "true" | "false"
-	checked?: boolean,
+	checked?: boolean  | undefined
 	id?: any,
 	label? : string | number,
 	type: "checkbox" | "radio",

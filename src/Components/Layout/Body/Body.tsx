@@ -6,7 +6,6 @@ import HomePage from "../../HomePage/HomePage";
 import AboutPage from "../../AboutPage/AboutPage";
 import ProductsPage from "../../ProductsPage/ProductsPage";
 import CartPage from "../../CartPage/CartPage";
-import ProductItem from "../../ProductItem/ProductItem";
 import AdminPage from "../../AdminPage/AdminPage";
 
 const Body = () => {
@@ -29,7 +28,7 @@ const Body = () => {
           <ProductsPage />
         </Route>
         <Route path={'/products/:productId'}>
-          <ProductItem />
+          {/*<ProductItem />*/}
         </Route>
         <Route path={'/cart'}>
           <CartPage />
