@@ -2,6 +2,7 @@ import Container from "../UI/Container/Container";
 import Button from "../UI/Button/Button";
 
 type PROPS = {
+  onClick?: any,
   id: any,
   name: string,
   model: string,
@@ -24,6 +25,7 @@ type PROPS = {
 const ProductItem = (props: PROPS) => {
 
   const {
+    onClick,
     name,
     model,
     price,
@@ -44,35 +46,37 @@ const ProductItem = (props: PROPS) => {
   } = props;
 
   return (
-    <Container
-      vBox
-      style={{
-        border: '1px solid black',
-        padding: '20px',
-        margin: '20px'
-      }}
-      htmlTag={'li'}
-    >
-      <p>{name && `Car name is: ${name}`}</p>
-      <p>{model && `Car model is: ${model}`}</p>
-      <p>{price && `Car price is : ${price}`}</p>
-      <p>{airCondition && 'Car has air condition'} </p>
-      <p>{img && `Car image is ${img}`}</p>
-      <p>{transmission && `Car has ${transmission} transmission`}</p>
-      <p>{luggage && `Car supports ${luggage} of bags`}</p>
-      <p>{doors && `Car has ${doors} doors`}</p>
-      <p>{passengers && `Car accepts ${passengers} passengers`}</p>
-      <p>{trailer && 'Car support trailer'}</p>
-      <p>{gps && 'Car has GPS'}</p>
-      <p>{childSeat && 'Car posses child seat'}</p>
-      {productsPage && <Button onClick={addItemToCart}>
-        Add to cart
-      </Button>}
-      {adminPage && <>
-        <Button onClick={deleteItem}>Delete item</Button>,
-        <Button onClick={editItem}>Edit item</Button>
-      </>}
-    </Container>
+    <div onClick={onClick}>
+      <Container
+        vBox
+        style={{
+          border: '1px solid black',
+          padding: '20px',
+          margin: '20px'
+        }}
+        htmlTag={'li'}
+      >
+        <p>{name && `Car name is: ${name}`}</p>
+        <p>{model && `Car model is: ${model}`}</p>
+        <p>{price && `Car price is : ${price}`}</p>
+        <p>{airCondition && 'Car has air condition'} </p>
+        <p>{img && `Car image is ${img}`}</p>
+        <p>{transmission && `Car has ${transmission} transmission`}</p>
+        <p>{luggage && `Car supports ${luggage} of bags`}</p>
+        <p>{doors && `Car has ${doors} doors`}</p>
+        <p>{passengers && `Car accepts ${passengers} passengers`}</p>
+        <p>{trailer && 'Car support trailer'}</p>
+        <p>{gps && 'Car has GPS'}</p>
+        <p>{childSeat && 'Car posses child seat'}</p>
+        {productsPage && <Button onClick={addItemToCart}>
+            Add to cart
+        </Button>}
+        {adminPage && <>
+            <Button onClick={deleteItem}>Delete item</Button>,
+            <Button onClick={editItem}>Edit item</Button>
+        </>}
+      </Container>
+    </div>
   )
 }
 
