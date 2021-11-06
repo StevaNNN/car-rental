@@ -1,20 +1,21 @@
 import React, { useEffect } from "react";
+import { useDispatch } from "react-redux";
+import { getCarData } from "./actions/product-actions";
+import { updateCookie } from "./Containers/CartPage/CartPageSlice/guest-slice";
+import { withCookies } from "react-cookie";
+
 import Header from "./Components/Layout/Header/Header";
 import Body from "./Components/Layout/Body/Body";
 import Footer from "./Components/Layout/Footer/Footer";
+
 import Container from "./Components/UI/Container/Container";
+import { GUEST_COOKIE_NAME } from "./utils";
+
 import classes from './App.module.scss';
 import './Theme/main.scss';
-import { useDispatch } from "react-redux";
-import { getCarData } from "./actions/product-actions";
-import { updateCookie } from "./store/guest-store";
-import { withCookies } from "react-cookie";
-import { GUEST_COOKIE_NAME } from "./util";
 
 const App = (props: any) => {
   const dispatch = useDispatch();
-  // const guestData = useSelector((state: guestState) => state.guest);
-
   const { allCookies } = props;
 
   useEffect(() => {

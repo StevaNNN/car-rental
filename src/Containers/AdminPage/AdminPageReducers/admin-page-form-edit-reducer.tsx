@@ -1,4 +1,4 @@
-import { Car } from "../Components/types";
+import { Car } from "../../../types";
 
 type Action =
   { type: 'NAME', payload: string } |

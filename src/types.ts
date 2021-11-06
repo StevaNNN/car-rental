@@ -9,9 +9,9 @@ export type Car = {
   luggage: string,
   doors: string,
   passengers: string,
-  trailer: boolean | undefined,
-  gps: boolean | undefined,
-  childSeat: boolean | undefined,
+  trailer?: boolean,
+  gps?: boolean,
+  childSeat?: boolean,
 }
 
 export type CarAdditional = {

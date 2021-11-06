@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Container from "../UI/Container/Container";
-import Input from "../UI/Input/Input";
-import Button from "../UI/Button/Button";
+import Container from "../../Components/UI/Container/Container";
+import Input from "../../Components/UI/Input/Input";
+import Button from "../../Components/UI/Button/Button";
 // import { cartState } from "../../store/cart-store";
-import { Car } from "../types";
-import { validateEmailField, validateTextField } from "../../util";
+import { Car } from "../../types";
+import { validateEmailField, validateTextField } from "../../utils";
 import useField from "../../hooks/use-field";
 import { sendItemToCart } from "../../actions/cart-actions";
-import { guestState } from "../../store/guest-store";
-import Dialog from "../UI/Dialog/Dialog";
-import ProductItem from "../ProductItem/ProductItem";
+import { guestState } from "./CartPageSlice/guest-slice";
+import Dialog from "../../Components/UI/Dialog/Dialog";
+import ProductItem from "../../Components/ProductItem/ProductItem";
 
 const CartPage = () => {
   const dispatch = useDispatch();

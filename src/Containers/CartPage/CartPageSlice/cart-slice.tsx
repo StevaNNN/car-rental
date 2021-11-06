@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { CarAdditional, CartItem } from "../Components/types";
-import store from "./index";
-import { carInitialState } from "../util";
+import { CarAdditional, CartItem } from "../../../types";
+import store from "../../../store";
+import { carInitialState } from "../../../utils";
 
 const initialCartCarAdditionalState : CarAdditional = {
   pickUpAddress: '',

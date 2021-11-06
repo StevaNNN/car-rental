@@ -1,4 +1,4 @@
-import { CartItem } from "../Components/types";
+import { CartItem } from "../types";
 import { sendCartItem } from "../api";
 
 export const sendItemToCart = (cartItem: CartItem) => {

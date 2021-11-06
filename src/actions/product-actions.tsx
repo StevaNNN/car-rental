@@ -1,6 +1,6 @@
 import { getCars } from "../api";
-import { replaceProducts } from "../store/products-store";
-import { firebaseObjectsToArray } from "../util";
+import { replaceProducts } from "../Containers/ProductsPage/ProductsPageSlice/products-slice";
+import { firebaseObjectsToArray } from "../utils";
 /*
 * Get car list data and replace current product slice state with the one derived from request
 * */

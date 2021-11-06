@@ -1,16 +1,16 @@
 import React from "react";
 import classes from './Body.module.scss';
-import {Switch, Route, Redirect} from "react-router";
+import { Switch, Route, Redirect } from "react-router";
 import Container from "../../UI/Container/Container";
 import HomePage from "../../HomePage/HomePage";
 import AboutPage from "../../AboutPage/AboutPage";
-import ProductsPage from "../../ProductsPage/ProductsPage";
-import CartPage from "../../CartPage/CartPage";
-import AdminPage from "../../AdminPage/AdminPage";
-import {ProductItemPage} from "../../ProductItemPage/ProductItemPage";
+import ProductsPage from "../../../Containers/ProductsPage/ProductsPage";
+import CartPage from "../../../Containers/CartPage/CartPage";
+import AdminPage from "../../../Containers/AdminPage/AdminPage";
+import { ProductItemPage } from "../../../Containers/ProductItemPage/ProductItemPage";
 
 const Body = () => {
-  return(
+  return (
     <Container
       className={classes.ViewportBody}
       htmlTag={'main'}
@@ -34,7 +34,7 @@ const Body = () => {
         <Route path={'/cart'}>
           <CartPage />
         </Route>
-        <Redirect to={'/home'}/>
+        <Redirect to={'/home'} />
       </Switch>
     </Container>
   )

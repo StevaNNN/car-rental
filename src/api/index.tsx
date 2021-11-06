@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Car, CartItem } from "../Components/types";
+import { Car, CartItem } from "../types";
 
 const instance = axios.create({
   baseURL : `${process.env.REACT_APP_BASE_URL}`

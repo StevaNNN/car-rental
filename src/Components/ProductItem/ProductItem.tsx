@@ -2,47 +2,47 @@ import Container from "../UI/Container/Container";
 import Button from "../UI/Button/Button";
 
 type PROPS = {
-  onClick?: any,
-  id: any,
-  name: string,
-  model: string,
-  price: string,
-  img: string,
-  airCondition: boolean | undefined,
-  transmission?: string,
-  luggage: string,
-  doors: string,
-  passengers: string,
-  trailer: boolean | undefined,
-  gps?: boolean | undefined,
-  childSeat?: boolean | undefined,
-  deleteItem?: any,
-  addItemToCart?: any,
-  editItem?: any,
-  adminPage?: boolean,
-  productsPage?: boolean
+  addItemToCart?: any
+  airCondition: boolean | undefined
+  childSeat?: boolean
+  deleteItem?: any
+  editItem?: any
+  doors: string | undefined
+  gps?: boolean
+  id?: any
+  img: string | undefined
+  luggage: string | undefined
+  model: string | undefined
+  name: string | undefined
+  onClick?: any
+  price: string | undefined
+  passengers: string | undefined
+  trailer?: boolean
+  transmission: string | undefined
+  withAddToCartButton?: boolean
+  withAddEditCarButton?: boolean
 }
 const ProductItem = (props: PROPS) => {
 
   const {
-    onClick,
-    name,
-    model,
-    price,
-    img,
+    addItemToCart,
     airCondition,
-    transmission,
-    luggage,
+    childSeat,
+    deleteItem,
+    editItem,
     doors,
+    gps,
+    img,
+    luggage,
+    model,
+    name,
+    onClick,
+    price,
     passengers,
     trailer,
-    gps,
-    childSeat,
-    productsPage,
-    adminPage,
-    deleteItem,
-    addItemToCart,
-    editItem
+    transmission,
+    withAddToCartButton,
+    withAddEditCarButton
   } = props;
 
   return (
@@ -56,11 +56,11 @@ const ProductItem = (props: PROPS) => {
         }}
         htmlTag={'li'}
       >
+        {img ? <img src={img} alt={`${name} ${model}`} /> : null}
         <p>{name && `Car name is: ${name}`}</p>
         <p>{model && `Car model is: ${model}`}</p>
         <p>{price && `Car price is : ${price}`}</p>
         <p>{airCondition && 'Car has air condition'} </p>
-        <p>{img && `Car image is ${img}`}</p>
         <p>{transmission && `Car has ${transmission} transmission`}</p>
         <p>{luggage && `Car supports ${luggage} of bags`}</p>
         <p>{doors && `Car has ${doors} doors`}</p>
@@ -68,12 +68,12 @@ const ProductItem = (props: PROPS) => {
         <p>{trailer && 'Car support trailer'}</p>
         <p>{gps && 'Car has GPS'}</p>
         <p>{childSeat && 'Car posses child seat'}</p>
-        {productsPage && <Button onClick={addItemToCart}>
-            Add to cart
+        {withAddToCartButton && <Button onClick={addItemToCart}>
+          Add to cart
         </Button>}
-        {adminPage && <>
-            <Button onClick={deleteItem}>Delete item</Button>,
-            <Button onClick={editItem}>Edit item</Button>
+        {withAddEditCarButton && <>
+          <Button onClick={deleteItem}>Delete item</Button>,
+          <Button onClick={editItem}>Edit item</Button>
         </>}
       </Container>
     </div>

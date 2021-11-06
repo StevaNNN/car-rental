@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { CarAdditional } from "../Components/types";
-import store from "./index";
-import { carInitialState } from "../util";
+import { CarAdditional } from "../../../types";
+import store from "../../../store";
+import { carInitialState } from "../../../utils";
 
 export const initialGuestCarAdditionalState: CarAdditional = {
   pickUpAddress: '',

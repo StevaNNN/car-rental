@@ -1,7 +1,7 @@
 import React from "react";
-import { Car } from "../types";
-import ProductItem from "../ProductItem/ProductItem";
-import Container from "../UI/Container/Container";
+import { Car } from "../../types";
+import ProductItem from "../../Components/ProductItem/ProductItem";
+import Container from "../../Components/UI/Container/Container";
 
 type PROPS = {
   products: Car[],
@@ -10,10 +10,15 @@ type PROPS = {
 }
 
 const AdminPageCarList = (props: PROPS) => {
-  const { products, deleteItem, editItem} = props;
+  const {
+    products,
+    deleteItem,
+    editItem
+  } = props;
+
   return (
     <Container htmlTag='ul' vBox>
-      <h1>Products list:</h1>
+      {products.length > 1 && <h1>Products list:</h1>}
       <Container hBox>
         {products.map((product: Car, index: number) => {
           return (
@@ -32,7 +37,7 @@ const AdminPageCarList = (props: PROPS) => {
               trailer={product.trailer}
               gps={product.gps}
               childSeat={product.childSeat}
-              adminPage
+              withAddEditCarButton
               deleteItem={() => deleteItem(product.id)}
               editItem={() => editItem(product.id)}
             />
@@ -40,6 +45,6 @@ const AdminPageCarList = (props: PROPS) => {
         })}
       </Container>
     </Container>
-  )
+  );
 }
 export default AdminPageCarList;

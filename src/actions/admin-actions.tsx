@@ -1,5 +1,5 @@
 import { deleteCar, sendCar, updateCar } from "../api";
-import { Car } from "../Components/types";
+import { Car } from "../types";
 import { getCarData } from "./product-actions";
 
 export const sendCarData = (carData: Car) => async (dispatch: any) => {

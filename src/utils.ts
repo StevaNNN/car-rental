@@ -1,8 +1,11 @@
-import { Car } from "./Components/types";
+import { Car } from "./types";
 
 export const GUEST_COOKIE_NAME = "guestCookie";
+
 export const validateTextField = (value: any) => value.trim().length > 0;
+
 export const validateEmailField = (value: any) => validateTextField(value) && value.includes('@');
+
 export const validateForm = (car: Car) => {
   let formIsValid = false;
   const entries = Object.entries(car);
@@ -20,6 +23,7 @@ export const validateForm = (car: Car) => {
 
   return formIsValid;
 }
+
 export const carInitialState: Car = {
   name: '',
   model: '',

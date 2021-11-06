@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { Car } from "../Components/types";
-import store from "./index";
-import { carInitialState } from "../util";
+import { Car } from "../../../types";
+import store from "../../../store";
+import { carInitialState } from "../../../utils";
 
 const initialState: Car[] = [{
   ...carInitialState

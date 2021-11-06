@@ -1,7 +1,7 @@
-import {createSlice} from "@reduxjs/toolkit";
-import {carInitialState} from "../util";
-import {Car} from "../Components/types";
-import store from "./index";
+import { createSlice } from "@reduxjs/toolkit";
+import { carInitialState } from "../../../utils";
+import { Car } from "../../../types";
+import store from "../../../store";
 
 const initialState: Car = {
   ...carInitialState
@@ -10,12 +10,12 @@ const productItemSlice = createSlice({
   name: 'productItem',
   initialState,
   reducers: {
-    test: (state, action) => {
+    selectCar: (state, action) => {
       return action.payload
     }
   }
 });
 
-export const {test} = productItemSlice.actions;
+export const { selectCar } = productItemSlice.actions;
 export type productItemState = ReturnType<typeof store.getState>
 export default productItemSlice;
