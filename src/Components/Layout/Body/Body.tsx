@@ -7,7 +7,7 @@ import AboutPage from "../../AboutPage/AboutPage";
 import ProductsPage from "../../../Containers/ProductsPage/ProductsPage";
 import CartPage from "../../../Containers/CartPage/CartPage";
 import AdminPage from "../../../Containers/AdminPage/AdminPage";
-import { ProductItemPage } from "../../../Containers/ProductItemPage/ProductItemPage";
+import { ProductPage } from "../../../Containers/ProductPage/ProductPage";
 
 const Body = () => {
   return (
@@ -29,7 +29,7 @@ const Body = () => {
           <ProductsPage />
         </Route>
         <Route path={'/products/:productId'}>
-          <ProductItemPage />
+          <ProductPage />
         </Route>
         <Route path={'/cart'}>
           <CartPage />

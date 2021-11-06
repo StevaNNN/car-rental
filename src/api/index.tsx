@@ -11,6 +11,12 @@ export const sendCar = async (carData: Car) => await instance.post('/carList.jso
 export const deleteCar = async (id: any) => await instance.delete(`/carList/${id}.json`);
 export const updateCar = async (id: any, newCarData: Car) => await instance.put(`/carList/${id}.json`, newCarData);
 
+export const sendSelectedCar = async(data: Car) => await instance.put('/selectedCar.json', data);
+export const getSelectedCar = async() => {
+  const request = await instance.get('/selectedCar.json');
+  return await request.data;
+}
+
 export const getCarById = async (index: any) => {
   const request = await instance.get(`/carList/${index}.json`);
   return await request.data;

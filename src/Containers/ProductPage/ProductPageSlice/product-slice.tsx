@@ -6,8 +6,11 @@ import store from "../../../store";
 const initialState: Car = {
   ...carInitialState
 }
-const productItemSlice = createSlice({
-  name: 'productItem',
+
+const PREFIX = 'product';
+
+const productSlice = createSlice({
+  name: PREFIX,
   initialState,
   reducers: {
     selectCar: (state, action) => {
@@ -16,6 +19,6 @@ const productItemSlice = createSlice({
   }
 });
 
-export const { selectCar } = productItemSlice.actions;
-export type productItemState = ReturnType<typeof store.getState>
-export default productItemSlice;
+export const { selectCar } = productSlice.actions;
+export type productState = ReturnType<typeof store.getState>
+export default productSlice;

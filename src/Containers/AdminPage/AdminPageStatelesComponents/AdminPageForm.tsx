@@ -1,8 +1,8 @@
 import React, { FormEventHandler } from "react";
-import Input from "../../Components/UI/Input/Input";
-import CheckboxAndRadio from "../../Components/UI/CheckboxAndRadio/CheckboxAndRadio";
-import Button from "../../Components/UI/Button/Button";
-import { Car } from "../../types";
+import Input from "../../../Components/UI/Input/Input";
+import CheckboxAndRadio from "../../../Components/UI/CheckboxAndRadio/CheckboxAndRadio";
+import Button from "../../../Components/UI/Button/Button";
+import { Car } from "../../../types";
 
 type AdminPageFormProps = {
   data: Car,

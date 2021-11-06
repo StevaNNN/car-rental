@@ -1,7 +1,7 @@
 import React from "react";
-import { Car } from "../../types";
-import ProductItem from "../../Components/ProductItem/ProductItem";
-import Container from "../../Components/UI/Container/Container";
+import { Car } from "../../../types";
+import ProductItem from "../../../Components/ProductItem/ProductItem";
+import Container from "../../../Components/UI/Container/Container";
 
 type PROPS = {
   products: Car[],
@@ -20,7 +20,7 @@ const AdminPageCarList = (props: PROPS) => {
     <Container htmlTag='ul' vBox>
       {products.length > 1 && <h1>Products list:</h1>}
       <Container hBox>
-        {products.map((product: Car, index: number) => {
+        {!!products[0]?.id && products.map((product: Car, index: number) => {
           return (
             <ProductItem
               key={index}

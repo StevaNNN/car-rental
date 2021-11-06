@@ -7,7 +7,7 @@ import Button from "../../Components/UI/Button/Button";
 import { Car } from "../../types";
 import { validateEmailField, validateTextField } from "../../utils";
 import useField from "../../hooks/use-field";
-import { sendItemToCart } from "../../actions/cart-actions";
+import { sendItemToCart } from "./CartPageActions/cart-actions";
 import { guestState } from "./CartPageSlice/guest-slice";
 import Dialog from "../../Components/UI/Dialog/Dialog";
 import ProductItem from "../../Components/ProductItem/ProductItem";

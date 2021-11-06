@@ -4,24 +4,35 @@ import { useDispatch, useSelector } from "react-redux";
 import { productsState } from "./ProductsPageSlice/products-slice";
 import Container from "../../Components/UI/Container/Container";
 import { useHistory, useLocation } from "react-router";
-import { selectedCar } from "../../actions/product-item-actions";
+import { selectedCar } from "../ProductPage/ProductPageActions/product-actions";
+import { useEffect } from "react";
 
-const ProductsPage = () => {
+const ProductsPage = (props: any) => {
   const products = useSelector((state: productsState) => state.products);
   const dispatch = useDispatch();
   const history = useHistory();
   const location = useLocation();
+  let test: any = '';
 
-
-  const handleCarSelect = (id: any) => {
+  const handleCarSelect = async (id: any) => {
     dispatch(selectedCar(products[id].id));
-    history.push(location.pathname + `/${id}`);
+    test = setTimeout(() => {
+      history.push(location.pathname + `/${id}`);
+    }, 350);
   };
+
+
+  useEffect(() => {
+    console.log(test)
+    return () => {
+      clearTimeout(test);
+    }
+  }, [test])
 
   return (
     <Container htmlTag={'ul'} displayFlex wrap>
       {products.length < 1 && 'NO DATA FOUND'}
-      {products.map((product: Car, index) => {
+      {!!products[0]?.id && products.map((product: Car, index) => {
         return (
           <ProductItem
             onClick={() => handleCarSelect(index)}

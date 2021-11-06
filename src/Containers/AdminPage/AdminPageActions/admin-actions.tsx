@@ -1,6 +1,6 @@
-import { deleteCar, sendCar, updateCar } from "../api";
-import { Car } from "../types";
-import { getCarData } from "./product-actions";
+import { deleteCar, sendCar, updateCar } from "../../../api";
+import { Car } from "../../../types";
+import { getCarData } from "../../ProductsPage/ProductsPageActions/products-actions";
 
 export const sendCarData = (carData: Car) => async (dispatch: any) => {
   // sending new car to database
