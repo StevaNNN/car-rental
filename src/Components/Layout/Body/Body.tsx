@@ -7,6 +7,7 @@ import AboutPage from "../../AboutPage/AboutPage";
 import ProductsPage from "../../ProductsPage/ProductsPage";
 import CartPage from "../../CartPage/CartPage";
 import AdminPage from "../../AdminPage/AdminPage";
+import {ProductItemPage} from "../../ProductItemPage/ProductItemPage";
 
 const Body = () => {
   return(
@@ -28,7 +29,7 @@ const Body = () => {
           <ProductsPage />
         </Route>
         <Route path={'/products/:productId'}>
-          {/*<ProductItem />*/}
+          <ProductItemPage />
         </Route>
         <Route path={'/cart'}>
           <CartPage />
