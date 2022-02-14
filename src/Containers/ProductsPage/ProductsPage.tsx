@@ -14,10 +14,10 @@ const ProductsPage = (props: any) => {
   const location = useLocation();
   let test: any = '';
 
-  const handleCarSelect = async (id: any) => {
+  const handleCarSelect = async (id: any, name: any) => {
     dispatch(selectedCar(products[id].id));
     test = setTimeout(() => {
-      history.push(location.pathname + `/${id}`);
+      history.push(location.pathname + `/${name}`);
     }, 350);
   };
 
@@ -35,7 +35,7 @@ const ProductsPage = (props: any) => {
       {!!products[0]?.id && products.map((product: Car, index) => {
         return (
           <ProductItem
-            onClick={() => handleCarSelect(index)}
+            onClick={() => handleCarSelect(index, product.name)}
             key={index}
             name={product.name}
             model={product.model}

@@ -16,6 +16,9 @@ export const getSelectedCar = async() => {
   const request = await instance.get('/selectedCar.json');
   return await request.data;
 }
+export const deleteSelectedCar = async () => {
+  const request = await instance.delete('/selectedCar.json');
+}
 
 export const getCarById = async (index: any) => {
   const request = await instance.get(`/carList/${index}.json`);

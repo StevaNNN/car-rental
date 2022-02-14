@@ -1,4 +1,9 @@
-import { getCarById, getSelectedCar, sendSelectedCar } from "../../../api";
+import {
+  deleteSelectedCar,
+  getCarById,
+  getSelectedCar,
+  sendSelectedCar
+} from "../../../api";
 import { selectCar } from "../ProductPageSlice/product-slice";
 
 export const selectedCar = (id: any) => async (dispatch: any) => {
@@ -10,4 +15,8 @@ export const selectedCar = (id: any) => async (dispatch: any) => {
 export const updateSelectedCarOnRefresh = () => async (dispatch: any) => {
   const data = await getSelectedCar();
   dispatch(selectCar(data));
+}
+
+export const deleteSelectedCarAction = () => async (dispatch: any) => {
+  await deleteSelectedCar();
 }

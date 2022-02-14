@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import { productState } from "./ProductPageSlice/product-slice";
 import ProductItem from "../../Components/ProductItem/ProductItem";
 import Container from "../../Components/UI/Container/Container";
@@ -7,8 +7,10 @@ import Button from "../../Components/UI/Button/Button";
 import { useHistory } from "react-router";
 import { useCookies } from "react-cookie";
 import { GUEST_COOKIE_NAME, validateForm } from "../../utils";
+import {deleteSelectedCarAction} from "./ProductPageActions/product-actions";
 
 export const ProductPage = () => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const product = useSelector((state: productState) => state.product);
   const [cookies, setCookie] = useCookies([GUEST_COOKIE_NAME]);
@@ -17,6 +19,7 @@ export const ProductPage = () => {
 
   const goBackHandler = () => {
     history.goBack();
+    dispatch(deleteSelectedCarAction());
   }
 
   return (

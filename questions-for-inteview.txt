@@ -1,0 +1,119 @@
+Things to read for interview:
+
+
+1. Sta se desava po pritiskom na submit button kada popunjavamo neku formu?
+	1.1 Validacija svakog polja
+	1.2 Pakovanje podataka u neki objekat
+	1.3 Slanje serveru tih podataka u vidu recimo JSON formata
+
+2. Koje sve HTTP methode postoje?
+	2.1 GET => koristimo kada zelimo da zatrazimo neke podatke iz odredjenog resursa, slanjem GET-a uvek rezultira
+	2.2 POST => njega koristimo za slanje podataka serveru. Tip bodyja requesta se indetifiukje Content-Type headerom.
+	2.3 DELETE => saljemo zahtev backend-u da obrise odredjene podatke iz baze putem odredjenog URI-a
+		      Po slanju ovog requesta 3 vrste responsa se vracaju (202-accepted)(204-no-content)(200-ok)
+	2.4 PATCH => ovom HTTP methodom menjamo parcijalni deo nekog resursa u bazi ili UPDATEUJEMO jednostavno receno
+	             bez da kreiramo nov resurs jednostavno postojeci resurs updatujemo
+	2.5 PUT => ovom HTTP methodom kompletno menjamo sadrzaj nekog resursa u bazi, slican je POST-u u smislu da moze da
+		   kreira nov resurs ali samo ako postoji definisan URI (Uniform Resource Identifier). PUT ovreriduje
+		   kompletan resurs ako postoji ili kreira nov ako ne postoji.
+
+	Slanjem bilo koje HTTP methode rezultira Promisom, stanja koje neki promis vraca su sledece:
+		1. fullfilled (action succeeded),
+		2. rejected(action failed),
+		3. pending(action pending not fullfiled or rejected),
+		4. settled(ili fullfiled ili rejected).
+
+3. Da li se get methodom neki resurs moze brisati ili da li se nekomg delete methodom moze neki resurs dohvatiti?
+	Nije praksa ali moze, server napravi delete http methodu ciji ce kontrolor ustvari imati funkciju i vrsiti get
+	i obrnuto napraviti get http methodu koja ce imati funckciju za brisanje resursa.
+
+4. Procena izrade nekog feature-a?
+	1. Sagledavanje svih aspekata jednog featur-a.
+	2. Izdelio bih feature na neke celine:
+	     povezivanje sa server side-om,
+	     izrada novih komponenti ili koriscenje vec postojecih
+	3. Pisanje unit testova pitati da li se pisu testovi
+	4. Review code-a pitati da li se radi review
+	5. Prolazak pipelinova pitati da li postoje pipeline-ovi
+		3, 4, 5 stavka uticu na dodatnu procenu taska
+
+5. Sta mislim da je potrebno imati od tool-va mindseta za neki projekat koji je tipa component library ili bilo kog drugog projekta?
+	1. Linteri(tslint, eslint, sasslint)
+	2. Standardizovani code style(code formater na webstormu)
+	3. Testiranje svake komponente da bude apsolutno mandatorno
+	4. Abstraktni mindset
+	5. Zadovoljavanje AA Accessibility-a
+	6. Upoznatost za dizajnom komponenti
+
+6. Sta znam o react-u?
+	React je JS biblioteka za pravljenje web aplikacija. Koristi JSX kao templating engine koji je u principu HTML u JS-u.
+	React projekat mozemo pisati u class based componentama i functional compnent. Poseduju state managment unutar samih
+	komponenti ali se takodje moze koristiti u kombinaciji sa neki popularnim bibliotekaama kao sto su REDUX i FLUX. Implementira
+	VDOM koji updatuje samo odredjene delove real DOM-a i time se dobija na brzini ili performansi. Implementira neki vid
+	router-a iz React-Dom bilbioteke od koje React iskljucivo zavisi.
+
+7. Koja je prednost reacta i zasto ga koristiiti?
+	1. Ogroman comunity
+	2. Lak za ucenje
+	3. Reusabilnost komponenti
+	4. Performance
+	5. Support
+
+8. Storybook sta je i zasto se koristi?
+	Koristi se za prikazivanje web componenti u svim njihovim stanjima, opisa dokumentacije date komponente i njeno testiranje.
+
+9. Use State sta je u react-u?
+	Use state je hook koji koristimo u funkcionalnim componentama koji nam omogucava state managment u istim.
+	Prihvata jedan argument koji ce sluziti kao inicijalna vrednost definisanog state-a.
+	Vraca niz sa tacno dva argumenata, prvi je varijabla preko koje mozemo pristupiti state-u a druga je
+	funkcija kojom updatujemo state. Posle svakog updatovanja state-a react componenta se rerenderuje.
+
+10. Use Effect sta je u react-u?
+	Use Effect je hook u funkcionalnim komponentama koji manage-uje sporedne efekte. Sporednim efektima se smatraju sve
+	one operacije uticu na nesto izvan scope-a u kome se funkcionalna komponenta izvrsava
+	(network requests, dom manipulation,timer functions setTimeout, setInterval). Logika izvrsavanja side-effecta i same
+	komponente je odvojena i nezavisna. Hook prihvata 2 argumenta callback funkciju koja se izvrsava odmah nakon updatovanja
+	DOM-a i koja sadrzi logiku sporednog effecta. I opciono niz dependencija koji uticu na PONOVNO okidanje callback-a.
+	(znaci logika se okine uvek jednom). U prostom sluzi nam za implementiranje lifecycle methoda u funkc componentama.
+	Unutar callback funckije mozemo okinuti jos jednu funckiju koja nam sluzi kao clean up(nekog timer-a, zatvarnja soketa)
+	Ako ostavimo prazan niz za dep onda se ta funkcija okida po unmoutovanju date komponente, a ako imamo neki dep u nizu,
+	onda posle svakog njegovog updatovanja ne prilikom provog okidanja callback funkcije a pre same logike side effecta
+
+11. Use Callback sta je u react-u?
+    use Callback je hook u reactovim funkcionalnim komponentama koji nam sluzi za cuvanje odredjene funkcije ili njeno kesiranje
+    posle rerenderovanja komponente, u principu da se ne bi ponovo kreirala. u principu posle rekreiranja kaze novo kreiranoj funk
+    da se odnosi na onu prethodno definisanu firstFunction, secondFunction = firstFunction. Hook prihvata 2 argsa, prvi je sama funkcija
+    koju zelimo da saacuvamo a drugi je niz depenedencija koji treba biti popunjen sa svim spoljnim stvarima koji se koriste unutar same
+    funkcije koju hocemo da cuvamo, prosto da bi smo tu funkciju izvrsili ponovo posle neke promenee koja bi i trebala da je ponovo trigeruje
+    Tehnicki info: koriscenje useCallback-a stvara closure zato sto koristimo funkciju unutar funcionalne komponente i sve vanjske variable
+    su zakljucane za koriscenje unutar funkcije koju prolsedjujemo u useCallback-u, zato i postoji dep niz koji nam kaze izvrsi ponovo kesiranu
+    funkciju ako se nesto spolja promenilo a da je korisceno unutar same funkcije
+
+12. Sta je memo a sta useMemo?
+    memo je tool koji nam react providuje koji ima za ulogu optimizovanje rerenderovanja komponente. memo proverava da li
+    su prosli propsi za datu komponentu drugaciji posle rerenderovanja u parent komponenti i na taj naci ponovo rendra ili ne
+    datu komponentu. Komponente koje se nalaze u datoj komponenti kao child componente se takodje nece evaluriati.
+    Ovo uporedjivanje takodje kosta malo ali cini mi se manje nego sam rerender. Ne trebamo svuda koristiti memo iz prethodno
+    navedenih razloga(mogu doneti vise stete nego koristi). Takodje moramo imati reference i primitive values kada koristimo
+    memo zato sto u ti slucaju kada uporedjujemo reference type values takodje ce se komponenta ponovo narendati
+    zato sto je tehnicki to novo kreirani objekat ili funkcija. Primitive values se cuvaju u stack memoriji, a reference
+    values se storuju u heap delu memorije. UseCallback moze pomoci kada zelimo da cashiramo funkciju posle rerenderovanja.
+
+    useMemo je hook u funkcionalnim komponentama koji nam kao i useCallback omogucava da cashiramo podatke kako se ne bi rekreirali
+    po rerenderovanju naravno i on dolazi sa cenom memorija se puni vise i evaluacija da li je prosli data isti ili nije od novog
+    posle renderovanja. Zato se treba koristiti u slucajuevima kada kalkulacija nekog podatka izaziva performance issue(sortiranje nekog niza)
+    Prihvata dva argumenta prvi je funkcija koja jednostavno vraca podatke a druga je niz dependencija ako podaci
+    dolaze iz nekog spoljnog dela(preko propsa koji se moze menjati) koji ima za ulogu storovanje novog parceta podataka ako je doslo do promene
+    a prvi je aninimna funkcija koja jednostavno vraca bilo koje podatke tkoje zelimo da storujemo u memoriji...
+
+13. Use Ref sta je u react-u?
+	Use Ref je hook u funkcionalnim komponentama koji name pruza pristup DOM Node-u ili React Elementu.
+	Moze se koristiti za setovanje fokusa, trigerovanje animacija ili prilikom integracije za trhid party bibliotekama.
+	Funkcionalne komponente nemaju instancu samim tim one nam onemogucavaju koriscenje href atributa na njima u parent-u
+	ali postiji forward ref koji nam tu funckionalnost pruza. Hook prihvata inicijalnu vrednost za referencu obicno je to null.
+	tu vrednost trebamo storovati u nekoj varijabli na pocetku funk komponente kako bi se odnosili nize na nju
+
+14. HighOrder componente cemu sluze?
+    Je napredna tehnika u react-u za ponovno iskorisvavanje komponentine logike. U principu to je funkcija koja prihvata komponentu
+    i vraca novu verziju te prosledjene komponente. HOC ne menja ulaznu komponentu, niti koristi nasledjivanje da kopira njeno ponasanje.
+    Umesto toga, HOC sastavlja originalnu komponentu tako sto je wrapuje u kontainer komponentu. HOC je pure funkcija i nema nikakvih side-effect-a

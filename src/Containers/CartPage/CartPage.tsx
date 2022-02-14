@@ -5,18 +5,20 @@ import Input from "../../Components/UI/Input/Input";
 import Button from "../../Components/UI/Button/Button";
 // import { cartState } from "../../store/cart-store";
 import { Car } from "../../types";
-import { validateEmailField, validateTextField } from "../../utils";
+import {carInitialState, GUEST_COOKIE_NAME, validateEmailField, validateTextField} from "../../utils";
 import useField from "../../hooks/use-field";
 import { sendItemToCart } from "./CartPageActions/cart-actions";
-import { guestState } from "./CartPageSlice/guest-slice";
+import {guestState, initialGuestCarAdditionalState, updateCookie} from "./CartPageSlice/guest-slice";
 import Dialog from "../../Components/UI/Dialog/Dialog";
 import ProductItem from "../../Components/ProductItem/ProductItem";
+import {useCookies} from "react-cookie";
 
 const CartPage = () => {
   const dispatch = useDispatch();
   // const cartData = useSelector((state: cartState) => state.cart);
   const [isDialogVisible, setIsDialogVisible] = useState<boolean>(false);
   const guestData = useSelector((state: guestState) => state.guest);
+  const [cookies, setCookie, removeCookie] = useCookies([GUEST_COOKIE_NAME]);
   const [selectedCar, setSelectedCar] = useState<Car>({
     id: '',
     name: '',
@@ -118,6 +120,14 @@ const CartPage = () => {
     formIsValid = true
   }
 
+  const handleCartReset = () => {
+    dispatch(updateCookie({
+      ...initialGuestCarAdditionalState,
+      ...carInitialState
+    }));
+    removeCookie(GUEST_COOKIE_NAME);
+  }
+
   const onFormSubmit = (e: any) => {
     e.preventDefault();
 
@@ -162,22 +172,29 @@ const CartPage = () => {
     <Container className="cart-page" hBox>
       <Container flex1>
         <ul className="cart-items">
-          <ProductItem
-            key={name}
-            name={name}
-            model={selectedCar.model}
-            price={selectedCar.price}
-            img={selectedCar.img}
-            airCondition={selectedCar.airCondition}
-            transmission={selectedCar.transmission}
-            luggage={selectedCar.luggage}
-            doors={selectedCar.doors}
-            passengers={selectedCar.passengers}
-            trailer={selectedCar.trailer}
-            gps={selectedCar.gps}
-            childSeat={selectedCar.childSeat}
-           id={name}/>
+          {cookies[GUEST_COOKIE_NAME] &&  <ProductItem
+              key={name}
+              name={name}
+              model={selectedCar.model}
+              price={selectedCar.price}
+              img={selectedCar.img}
+              airCondition={selectedCar.airCondition}
+              transmission={selectedCar.transmission}
+              luggage={selectedCar.luggage}
+              doors={selectedCar.doors}
+              passengers={selectedCar.passengers}
+              trailer={selectedCar.trailer}
+              gps={selectedCar.gps}
+              childSeat={selectedCar.childSeat}
+              id={name}
+          />}
         </ul>
+        {cookies[GUEST_COOKIE_NAME] && <Button
+            onClick={handleCartReset}
+            primary
+        >
+          Clear cart
+        </Button>}
       </Container>
       <Container vBox>
         <Container vBox flex1 style={{ "marginBottom": "20px" }}>

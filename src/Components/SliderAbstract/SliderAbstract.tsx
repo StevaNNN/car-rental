@@ -14,7 +14,7 @@ const SliderAbstract = (props: any) => {
 
   return (
     <Container className={classes.SliderWrap}>
-      <Slider{...sliderSettings}>
+      <Slider {...sliderSettings} {...props.sliderSettings}>
         <img src="https://placeimg.com/640/480/any" alt="alt" />
         <img src="https://placeimg.com/640/480/any" alt="alt" />
         <img src="https://placeimg.com/640/480/any" alt="alt" />
